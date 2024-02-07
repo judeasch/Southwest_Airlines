@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Southwest_Airlines.Pages.Seats
+namespace Southwest_Airlines.Models
 {
     public class SeatModalModel : PageModel
     {
