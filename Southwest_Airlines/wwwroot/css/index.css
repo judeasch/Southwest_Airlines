@@ -1,0 +1,17 @@
+﻿div .login {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+div .row {
+    margin-bottom: 15px;
+}
+
+button.login-button {
+    background-color: #ffbf27;
+    color: #111b40;
+    border: 1px solid #ffbf27;
+    border-radius: 2px;
+    box-shadow: 0 1px #8f8f8f;
+}
