@@ -5,8 +5,6 @@ namespace Southwest_Airlines.Data.Models;
 
 public partial class Customer
 {
-    public int CustomerId { get; set; }
-
     public string? FirstName { get; set; }
 
     public string? LastName { get; set; }
@@ -28,6 +26,8 @@ public partial class Customer
     public string? Address { get; set; }
 
     public int? LoginId { get; set; }
+
+    public int CustomerId { get; set; }
 
     public virtual Login? Login { get; set; }
 

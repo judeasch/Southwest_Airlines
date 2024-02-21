@@ -43,9 +43,7 @@ public partial class FastpassContext : DbContext
         {
             entity.ToTable("CUSTOMERS");
 
-            entity.Property(e => e.CustomerId)
-                .ValueGeneratedNever()
-                .HasColumnName("CustomerID");
+            entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
             entity.Property(e => e.City).HasMaxLength(50);
             entity.Property(e => e.Country).HasMaxLength(50);
             entity.Property(e => e.Email).HasMaxLength(50);
@@ -60,16 +58,16 @@ public partial class FastpassContext : DbContext
                 .IsFixedLength();
             entity.Property(e => e.State).HasMaxLength(50);
 
-            entity.HasOne(d => d.Login).WithMany(p => p.Customers).HasForeignKey(d => d.LoginId);
+            entity.HasOne(d => d.Login).WithMany(p => p.Customers)
+                .HasForeignKey(d => d.LoginId)
+                .OnDelete(DeleteBehavior.Cascade);
         });
 
         modelBuilder.Entity<Flight>(entity =>
         {
             entity.ToTable("FLIGHTS");
 
-            entity.Property(e => e.FlightId)
-                .ValueGeneratedNever()
-                .HasColumnName("FlightID");
+            entity.Property(e => e.FlightId).HasColumnName("FlightID");
             entity.Property(e => e.Destination).HasMaxLength(50);
             entity.Property(e => e.Origin).HasMaxLength(50);
             entity.Property(e => e.Price).HasColumnType("money");
@@ -79,9 +77,7 @@ public partial class FastpassContext : DbContext
         {
             entity.ToTable("LOGINS");
 
-            entity.Property(e => e.LoginId)
-                .ValueGeneratedNever()
-                .HasColumnName("LoginID");
+            entity.Property(e => e.LoginId).HasColumnName("LoginID");
             entity.Property(e => e.Password).HasMaxLength(50);
             entity.Property(e => e.Username).HasMaxLength(50);
         });
@@ -90,20 +86,21 @@ public partial class FastpassContext : DbContext
         {
             entity.ToTable("SEATS");
 
-            entity.Property(e => e.SeatId)
-                .ValueGeneratedNever()
-                .HasColumnName("SeatID");
+            entity.Property(e => e.SeatId).HasColumnName("SeatID");
+            entity.Property(e => e.FlightId).HasColumnName("FlightID");
             entity.Property(e => e.Price).HasColumnType("money");
             entity.Property(e => e.SeatNumber).HasMaxLength(50);
+
+            entity.HasOne(d => d.Flight).WithMany(p => p.Seats)
+                .HasForeignKey(d => d.FlightId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
         });
 
         modelBuilder.Entity<Ticket>(entity =>
         {
             entity.ToTable("TICKETS");
 
-            entity.Property(e => e.TicketId)
-                .ValueGeneratedNever()
-                .HasColumnName("TicketID");
+            entity.Property(e => e.TicketId).HasColumnName("TicketID");
             entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
             entity.Property(e => e.FlightId).HasColumnName("FlightID");
             entity.Property(e => e.PricePaid).HasColumnType("money");

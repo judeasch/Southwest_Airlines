@@ -1,13 +1,53 @@
-﻿@page
-@model IndexModel
+﻿@model FlightModel
 @{
     ViewData["Title"] = "Seats";
+
+    var seatIndex = 0;
 }
 <head>
-    <link rel="stylesheet" href="~/css/seats.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/flights.css" asp-append-version="true" />
 </head>
 
 <section id="seatMapContainer" class="seat-map-grid example-flight">
+    <h3>Seat Map</h3>
+    <div class="econ-class">
+        @for (var i = 0; i < Model.NumberOfRows; i++)
+        {
+            <div class="row">
+                @for (var e = 0; e < 6; e++)
+                {
+                    if (e == 3)
+                    {
+                        <div class="aisle-number">@(i + 1)</div>
+                        <div class="cell seat @Model.Seats.ElementAt(seatIndex).Value">
+                            <i class="fa-solid fa-square fa-2x"></i>
+                        </div>
+                        seatIndex++;
+                    }
+
+                    else
+                    {
+                        <div class="cell seat @Model.Seats.ElementAt(seatIndex).Value">
+                            <i class="fa-solid fa-square fa-2x"></i>
+                        </div>
+                        seatIndex++;
+                    }
+                }
+            </div>
+        }
+    </div>
+    <h5>Key:</h5>
+    <div class="available key">
+        <i class="fa-solid fa-square"></i>
+        <p>Available</p>
+    </div>
+    <div class="unavailable key">
+        <i class="fa-solid fa-square"></i>
+        <p>Unavailable</p>
+    </div>
+</section>
+
+@* <section id="seatMapContainer" class="seat-map-grid example-flight">
     <h3>Seat Map</h3>
     <h5>First Class</h5>
     <div class="first-class">
@@ -139,7 +179,7 @@
         <p>Unavailable</p>
     </div>
 </section>
-
+ *@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/seats.js" asp-append-version="true"></script>
+<script src="~/js/flights.js" asp-append-version="true"></script>
