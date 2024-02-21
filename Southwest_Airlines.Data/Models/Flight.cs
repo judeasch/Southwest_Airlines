@@ -5,8 +5,6 @@ namespace Southwest_Airlines.Data.Models;
 
 public partial class Flight
 {
-    public int FlightId { get; set; }
-
     public string? Origin { get; set; }
 
     public string? Destination { get; set; }
@@ -22,6 +20,10 @@ public partial class Flight
     public decimal? Price { get; set; }
 
     public int NumberOfFirstClassSeats { get; set; }
+
+    public int FlightId { get; set; }
+
+    public virtual ICollection<Seat> Seats { get; set; } = new List<Seat>();
 
     public virtual ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
 }

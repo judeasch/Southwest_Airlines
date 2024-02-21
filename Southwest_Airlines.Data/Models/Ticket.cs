@@ -5,8 +5,6 @@ namespace Southwest_Airlines.Data.Models;
 
 public partial class Ticket
 {
-    public int TicketId { get; set; }
-
     public int? CustomerId { get; set; }
 
     public int? FlightId { get; set; }
@@ -18,6 +16,8 @@ public partial class Ticket
     public string? Status { get; set; }
 
     public decimal? PricePaid { get; set; }
+
+    public int TicketId { get; set; }
 
     public virtual Customer? Customer { get; set; }
 
