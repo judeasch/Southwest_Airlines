@@ -1,17 +1,44 @@
-﻿div .login {
+﻿
+div.login {
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
+    background-color: #ffffff; /* Assuming a white background */
+    padding: 20px;
+    border-radius: 4px; /* Optional: if you want rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    width: 300px; 
+    margin: auto; /* Centers the div if within a flex or block container */
 }
 
-div .row {
+
+div.row {
     margin-bottom: 15px;
+    width: 100%; /* Ensures it takes up full available width */
 }
 
+/* Style for the login button */
 button.login-button {
-    background-color: #ffbf27;
-    color: #111b40;
-    border: 1px solid #ffbf27;
-    border-radius: 2px;
-    box-shadow: 0 1px #8f8f8f;
+    background-color: #ffbf27; 
+    color: #111b40; 
+    border: none; /* Removing border for a flat design */
+    border-radius: 4px; /* Rounded corners for the button */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    padding: 10px 20px; 
+    font-weight: bold; 
+    font-size: 1rem; 
+    cursor: pointer; /
+    transition: background-color 0.3s ease; 
+}
+
+/* Hover effect for the login button */
+button.login-button:hover {
+    background-color: #e0a800; /* Slightly darker yellow on hover */
+}
+
+
+button.login-button:focus {
+    outline: 2px solid #ffbf27; /* Adding an outline to indicate focus */
+    outline-offset: 2px; 
 }
