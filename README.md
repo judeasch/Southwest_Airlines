@@ -3,18 +3,18 @@
 
 
 ## Built with
-OS: Windows 10 and Windows 11
-IDE: Visual Studio 2022
-Framework: .NET Core 8.0.2
-Code Template: ASP.NET Core Web App (Model-View-Controller)
-Database Manager: SQL Server 2019 and SQL Server 2022
+- OS: Windows 10 and Windows 11
+- IDE: Visual Studio 2022
+- Framework: .NET Core 8.0.2
+- Code Template: ASP.NET Core Web App (Model-View-Controller)
+- Database Manager: SQL Server 2019 and SQL Server 2022
 
 ## Current software requirements to run site
-Must have laptop/desktop computer (cannot be on mobile)
-Must have Visual Studio 2022
-Must have .NET Core 8.0.2 or better
-Must have SQL Server 2019 or better
-Recommended to have Windows 10 or better
+- Must have laptop/desktop computer (cannot be on mobile)
+- Must have Visual Studio 2022
+- Must have .NET Core 8.0.2 or better
+- Must have SQL Server 2019 or better
+- Recommended to have Windows 10 or better
 
 ## Purpose and audience
 The Southwest_Airlines project is intended for both Southwest Airlines employees and customers. Broadly, it will achieve 4 main goals:
@@ -24,7 +24,7 @@ The Southwest_Airlines project is intended for both Southwest Airlines employees
 4. Collect and display data about Fastpass purchases and profits
 
 ## Tests run
-1. User: Jude; Test: Verify the landing page is the login by going to the default url
-	Results: Success
-2. User: Jude; Test: Verify the seat database is being retrieved and displayed correctly by going to the url (domain)/flights/detail/2
-	Results: Error. Upon debugging, I found that the seats were being retrieved, but there was an error in the logic to format them for display. Corrected
+1. **User:** Jude; **Test:** Verify the landing page is the login by going to the default url
+     - **Results:** Success
+2. **User:** Jude; **Test:** Verify the seat database is being retrieved and displayed correctly by going to the url (domain)/flights/detail/2
+     - **Results:** Error. Upon debugging, I found that the seats were being retrieved, but there was an error in the logic to format them for display. Corrected
