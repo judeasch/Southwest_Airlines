@@ -11,6 +11,7 @@ $(function () {
         $(this).addClass('selected');
     });
 
+    /*
     $submitBtn.click(function () {
         var seat = $('div').find('.selected');
         if (seat != null) {
@@ -30,6 +31,6 @@ $(function () {
                 }
             });
         }
-    });
+    }); */
 
 });
