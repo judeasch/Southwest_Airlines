@@ -39,7 +39,7 @@ namespace Southwest_Airlines.Models
         public Dictionary<string, string> ConvertSeatNumbers(Dictionary<string, string> seats) 
         {
             Dictionary<string, string> convertedSeats = new Dictionary<string, string>();
-            string[] letters = ["a", "b", "c", "d", "e", "f"];  // airplane seats have a number followed by a letter, ex: 1A, 3C, etc
+            string[] letters = ["A", "B", "C", "D", "E", "F"];  // airplane seats have a number followed by a letter, ex: 1A, 3C, etc
             var count = 0; // keep track of the current index in seats
 
             for (var i = 0; i < NumberOfRows; i++)
