@@ -26,6 +26,8 @@ public partial class FastpassContext : DbContext
 
     public virtual DbSet<Ticket> Tickets { get; set; }
 
+    // todo: this method is overwritten everytime db is scaffolded,
+    // put this in a separate class that inherits FastpassContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         var configuration = new ConfigurationBuilder()
