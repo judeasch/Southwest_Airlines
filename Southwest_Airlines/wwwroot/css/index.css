@@ -10,7 +10,7 @@ body {
 
 /* Header styling */
 .header {
-    background-color: #005288; /* Adjusted to a deep blue */
+    background-color: transparent; 
     color: #ffffff;
     text-align: center;
     padding: 20px 0;
@@ -56,7 +56,7 @@ body {
 
 /* Footer styling */
 footer {
-    background-color: #ff221c; /* Southwest's signature red for the footer */
+    background-color: #005288; /* Southwest's signature red for the footer */
     color: white;
     text-align: center;
     padding: 10px;
