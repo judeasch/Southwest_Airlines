@@ -10,7 +10,7 @@ body {
 
 /* Header styling */
 .header {
-    background-color: #005f5f;
+    background-color: #005288; /* Adjusted to a deep blue */
     color: #ffffff;
     text-align: center;
     padding: 20px 0;
@@ -18,7 +18,7 @@ body {
 
 /* Navigation bar styling */
 .navbar {
-    background-color: #007777;
+    background-color: #25559b; /* A slightly different shade of blue for visual interest */
     overflow: hidden;
 }
 
@@ -42,7 +42,7 @@ body {
 
                 .navbar ul li a.active,
                 .navbar ul li a:hover {
-                    background-color: #009999;
+                    background-color: #ffbf00; /* A vibrant yellow for active/hover states */
                 }
 
 /* Main content styling */
@@ -56,7 +56,7 @@ body {
 
 /* Footer styling */
 footer {
-    background-color: #005f5f;
+    background-color: #ff221c; /* Southwest's signature red for the footer */
     color: white;
     text-align: center;
     padding: 10px;
