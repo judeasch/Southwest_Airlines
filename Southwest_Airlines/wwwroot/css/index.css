@@ -1,44 +1,72 @@
-﻿/*By Saraswoti*/
-div.login {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background-color: #ffffff; /* Assuming a white background */
+﻿﻿
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Header styling */
+.header {
+    background-color: #005288; /* Adjusted to a deep blue */
+    color: #ffffff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Navigation bar styling */
+.navbar {
+    background-color: #25559b; /* A slightly different shade of blue for visual interest */
+    overflow: hidden;
+}
+
+    .navbar ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+        .navbar ul li {
+            float: left;
+        }
+
+            .navbar ul li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+                .navbar ul li a.active,
+                .navbar ul li a:hover {
+                    background-color: #ffbf00; /* A vibrant yellow for active/hover states */
+                }
+
+/* Main content styling */
+.main-content {
     padding: 20px;
-    border-radius: 4px; /* Optional: if you want rounded corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    margin: auto; /* Centers the div if within a flex or block container */
+    margin-top: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-
-div.row {
-    margin-bottom: 15px;
-    width: 100%; /* Ensures it takes up full available width */
+/* Footer styling */
+footer {
+    background-color: #ff221c; /* Southwest's signature red for the footer */
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }
 
-/* Style for the login button */
-button.login-button {
-    background-color: #ffbf27;
-    color: #111b40;
-    border: none; /* Removing border for a flat design */
-    border-radius: 4px; /* Rounded corners for the button */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 10px 20px;
-    font-weight: bold;
-    font-size: 1rem;
-    cursor: pointer;
-    / transition: background-color 0.3s ease;
-}
-
-    /* Hover effect for the login button */
-    button.login-button:hover {
-        background-color: #e0a800; /* Slightly darker yellow on hover */
+/* Responsive design adjustments */
+@media screen and (max-width: 600px) {
+    .navbar ul li {
+        float: none;
     }
-
-
-    button.login-button:focus {
-        outline: 2px solid #ffbf27; /* Adding an outline to indicate focus */
-        outline-offset: 2px;
-    }
+}

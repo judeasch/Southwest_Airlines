@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace Southwest_Airlines.Data.Models;
 
-public partial class FastpassContext : DbContext
+public partial class FastpassContext : IdentityDbContext<Login>
 {
     public FastpassContext()
     {
@@ -28,16 +29,16 @@ public partial class FastpassContext : DbContext
 
     // todo: this method is overwritten everytime db is scaffolded,
     // put this in a separate class that inherits FastpassContext
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        var configuration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json")
-            .Build();
+    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //{
+    //    var configuration = new ConfigurationBuilder()
+    //        .SetBasePath(Directory.GetCurrentDirectory())
+    //        .AddJsonFile("appsettings.json")
+    //        .Build();
 
-        var connectionString = configuration.GetConnectionString("SAConnection");
-        optionsBuilder.UseSqlServer(connectionString);
-    }
+    //    var connectionString = configuration.GetConnectionString("SAConnection");
+    //    optionsBuilder.UseSqlServer(connectionString);
+    //}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -122,7 +123,7 @@ public partial class FastpassContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade);
         });
 
-        OnModelCreatingPartial(modelBuilder);
+        base.OnModelCreating(modelBuilder);
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
