@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Southwest_Airlines.Data.Models
 {
-    public partial class FastpassContext : IdentityDbContext<Login>
+    public partial class FastpassContext : IdentityDbContext<IdentityUser>
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

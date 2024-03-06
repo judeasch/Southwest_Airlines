@@ -2,7 +2,7 @@
 
 namespace Southwest_Airlines.Models
 {
-    public class AccountModel
+    public class LoginModel
     {
         public string Username { get; set; }
 
@@ -10,7 +10,7 @@ namespace Southwest_Airlines.Models
         public string Password { get; set; }
 
         [Display(Name = "Remember Me")]
-        public bool RememberMe { get; set; }
-        public string ReturnUrl { get; set; }
+        public bool RememberMe { get; set; } // todo: make this functional on localhost
+        public string? ReturnUrl { get; set; }
     }
 }

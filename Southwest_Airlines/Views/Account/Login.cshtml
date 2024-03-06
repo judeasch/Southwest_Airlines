@@ -1,4 +1,4 @@
-﻿@model AccountModel
+﻿@model LoginModel
 @{
     ViewData["Title"] = "Login";
 }
@@ -9,36 +9,25 @@
 
 <form method="post" asp-controller="Account" asp-action="Login"
       asp-route-returnurl="@Model.ReturnUrl">
-    @* <div asp-validation-summary="ValidationSummary.ModelOnly"></div> *@
-
-    <div>
-        <label asp-for="Username"></label>
-        <input asp-for="Username" />
-        <span asp-validation-for="Username"></span>
-    </div>
-
-    <div>
-        <label asp-for="Password"></label>
-        <input asp-for="Password" />
-        <span asp-validation-for="Password"></span>
-    </div>
-
-    <div>
-        <label asp-for="RememberMe"></label>
-        <input asp-for="RememberMe" />
-        <span asp-validation-for="RememberMe"></span>
-    </div>
-    <input type="submit" value="Login" />
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="login">
+        <div class="row">
+            <label asp-for="Username"></label>
+            <input asp-for="Username" />
+            <span asp-validation-for="Username"></span>
+        </div>
+        <div class="row">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" />
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div>
+            <label asp-for="RememberMe"></label>
+            <input asp-for="RememberMe" />
+            <span asp-validation-for="RememberMe"></span>
+        </div>
+        <button class="login-button" type="submit" value="Login">Login</button>
+    </div>    
+    
 </form>
 
-<div id="loginContainer" class="login">
-    <div class="row" id="username">
-        <h6>Username</h6>
-        <input />
-    </div>
-    <div class="row" id="password">
-        <h6>Password</h6>
-        <input />
-    </div>
-    <button class="login-button">Log in</button>
-</div>

@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Southwest_Airlines.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Southwest_Airlines.Models;
 using System;
 
 namespace Southwest_Airlines.Controllers
 {
+    [Authorize]
     public class FlightsController : Controller
     {
         private readonly FastpassContext _context; // dbcontext allows to perform crud operations on database
