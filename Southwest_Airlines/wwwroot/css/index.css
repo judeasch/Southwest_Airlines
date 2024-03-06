@@ -1,14 +1,3 @@
-﻿
-
-/* General body styling */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
-
-/* Header styling */
 .header {
     background-color: transparent; 
     color: #ffffff;
@@ -31,6 +20,7 @@ body {
         .navbar ul li {
             float: left;
         }
+
 
             .navbar ul li a {
                 display: block;
@@ -57,6 +47,33 @@ body {
 /* Footer styling */
 footer {
     background-color: #005288; /* Southwest's signature red for the footer */
+
+
+            .navbar ul li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+                .navbar ul li a.active,
+                .navbar ul li a:hover {
+                    background-color: #ffbf00; /* A vibrant yellow for active/hover states */
+                }
+
+/* Main content styling */
+.main-content {
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Footer styling */
+footer {
+    background-color: #ff221c; /* Southwest's signature red for the footer */
     color: white;
     text-align: center;
     padding: 10px;
