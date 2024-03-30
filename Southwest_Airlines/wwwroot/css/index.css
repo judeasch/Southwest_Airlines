@@ -1,4 +1,4 @@
-﻿
+
 
 /* General body styling */
 html {
@@ -30,6 +30,7 @@ body {
         .navbar ul li {
             float: left;
         }
+
 
             .navbar ul li a {
                 display: block;
