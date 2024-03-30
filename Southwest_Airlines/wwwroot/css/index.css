@@ -9,10 +9,15 @@ html {
 
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+    min-height: 100vh;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1rem;
+    background-image: url('../Resources/images/blueScreen.png');
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: 75%;
+    background-position: center;
 }
 
 /* Navigation bar styling */
@@ -70,4 +75,33 @@ footer {
     .navbar ul li {
         float: none;
     }
+}
+img {
+    width: 35%;
+    height: auto;
+    padding: 5px;
+}
+
+p {
+    vertical-align: middle;
+    font-size: 100%;
+    text-align: center;
+    width: 60%;
+    flex: 50%;
+    margin: 10px;
+    padding: 10px;
+}
+
+button {
+    display: flex;
+    background-color: #FFBF27;
+    font-size: 18px;
+    width: 200px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+position:relative;
+top: 250px;
 }
