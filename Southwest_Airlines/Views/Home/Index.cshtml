@@ -5,53 +5,47 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="author" content="Team Flight Attendant">
 	<link rel="stylesheet" href="~/css/index.css ">
-	<title>Flight Attendants - Southwest Airlines</title>
-	<link rel="icon" href="Resources/images/favicon.ico" type="image/x-icon">
+	<title>SouthWest Fast Airlines</title>
+	<link rel="icon" href="~/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
 
-	<div>
-		<img src="~/images/swa_logo.png" alt="SouthwestFastAir" style="transform: translate(30px,0px); padding: 10px; background-color: rgb(255, 191, 39);">
-	</div>
+    <header class="site-header">
+    <div class="container header-container">
+        <img src="images/swa_logo.png" alt="Southwest Fast Air Logo" class="header-logo">
+        <h1 class="welcome-message">Welcome to Southwest Fast Airlines</h1>
+    </div>
+</header>
 
 
+    <main class="main-content">
+        <section class="home-content1">
+            <p class="p2">
+                Enjoy the Swift Service of Southwest Fast Air: Travel Quickly, Travel Conveniently!
+            </p>
+            <a class="learnmore" asp-controller="Home" asp-action="About">
+                LearnMore
+            </a>
 
+            
+        </section>
 
-	<section class="main-content">
-		<h1>Welcome to Our Flight Attendants Page</h1>
-		<p>
-			Southwest Airlines takes pride in its dedicated and passionate
-			flight attendants who play a pivotal role in ensuring the safety, comfort,
-			and satisfaction of our passengers. Our flight attendants are the heart of
-			our in-flight service, embodying our values and commitment to outstanding customer service.
-			Enhance your travel experience with our seat selection and FastPass options.
-			Seat selection is available online 24 hours before departure,
-			allowing you to choose your preferred seat through our check-in process on the
-			website or mobile app. For those seeking convenience and efficiency at the airport,
-			our FastPass option expedites your security check, making your journey smoother.
-			Add FastPass to your booking online, during the reservation process,
-			or by contacting customer service.
-		</p>
-	</section>
-	
+        <section class="home-content2">
+            <div class="text-content">
+                <p class="p2">
+                    With your Fast Pass, you're in command of your travels! 
+                    Pick out any dates that work for you to breeze through the airport with faster access.
+                    The Southwest Fast Airline Pass is tailored to elevate your travel routine, granting you 
+                    expedited service that caters to your need for quick and effortless passage. It's all about making your journey as smooth as possible, with you at the helm.
+                </p>
+                <p class="p2">
+                    Join us in revolutionizing travel – where every moment counts and every journey is a delight. SW Fast Air Fast Pass is not just a service; 
+                    it's our commitment to making your Southwest Airlines experience as smooth as possible. Explore a new era of travel convenience with SW Fast Air – because your journey matters.
+                </p>
+            </div>
+            <img src="images/girl.jpg" alt="Customer enjoying travel" class="content-image">
+        </section>
+    </main>
 
 </body>
 </html>
-@* @{
-	ViewData["Title"] = "Login";
-}
-<head>
-	<link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
-</head>
-
-<div id="loginContainer" class="login">
-	<div class="row" id="username">
-		<h6>Username</h6>
-		<input />
-	</div>
-	<div class="row" id="password">
-		<h6>Password</h6>
-		<input />
-	</div>
-	<button class="login-button">Log in</button>
-</div> *@

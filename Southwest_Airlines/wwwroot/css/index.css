@@ -13,13 +13,53 @@ body {
     max-width: 1000px;
     margin: 0 auto;
     padding: 1rem;
-    background-image: url('../Resources/images/blueScreen.png');
+    background-image: url('../~/images/blueScreen.png');
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-size: 75%;
     background-position: center;
 }
 
+.header-logo {
+    max-width: 200px; /* Makes the first image small */
+    padding: 3px;
+    background-color: rgb(255, 191, 39);
+    border-radius: 5px; /* Optional: Rounds the corners of the image background */
+}
+
+.welcome-message {
+    margin-left: 1.5px; /* Adjust size as necessary */
+}
+
+.home-content1 .p2 {
+    text-align: center; /* Centers your paragraph */
+    /* ... other styles for p2 ... */
+}
+
+.learnmore { /* Corrected class name to match HTML */
+    display: inline-block;
+    background-color: #ffbf27; /* Southwest's yellow color */
+    color: #111B40; /* Dark blue color for the text */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    font-weight: bold; /* Makes the link text bold */
+}
+
+.learn-more:hover {
+    background-color: #e6ac00;
+}
+
+
+.main-content {
+    background-color: #111B40; /* SouthWest blue color */
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align the content */
+    justify-content: space-between; /* Space the content out evenly */
+}
 /* Navigation bar styling */
 .navbar {
     background-color: #25559b; /* A slightly different shade of blue for visual interest */
@@ -50,6 +90,7 @@ body {
                     background-color: #ffbf00; /* A vibrant yellow for active/hover states */
                 }
 
+
 /* Main content styling */
 .main-content {
     padding: 20px;
@@ -75,33 +116,4 @@ footer {
     .navbar ul li {
         float: none;
     }
-}
-img {
-    width: 35%;
-    height: auto;
-    padding: 5px;
-}
-
-p {
-    vertical-align: middle;
-    font-size: 100%;
-    text-align: center;
-    width: 60%;
-    flex: 50%;
-    margin: 10px;
-    padding: 10px;
-}
-
-button {
-    display: flex;
-    background-color: #FFBF27;
-    font-size: 18px;
-    width: 200px;
-    height: 50px;
-    justify-content: center;
-    align-items: center;
-}
-
-position:relative;
-top: 250px;
 }

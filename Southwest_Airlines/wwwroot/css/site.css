@@ -13,6 +13,19 @@ header.top-header, .navbar {
     color: white !important; /* This will apply blue color to the text */
 }
 
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* This will space out the brand and logo */
+    padding: 10px;
+}
+
+.header-logo {
+    height: 80px; /* Or your desired size */
+    width: auto;
+    order: 2; /* This will ensure the logo is on the right */
+}
+
 @media (min-width: 768px) {
     html {
         font-size: 16px;
