@@ -1,1 +1,51 @@
-﻿
+﻿@model FlightListModel
+@{
+    ViewData["Title"] = "Flights";
+}
+<head>
+    <link rel="stylesheet" href="~/css/Flights/index.css" asp-append-version="true" />
+</head>
+
+<section class="flights">
+    <h1>Flights</h1>
+    <div class="flight-grid">
+        <header>
+            <div class="origin col">
+                Origin
+            </div>
+            <div class="destination col">
+                Destination
+            </div>
+            <div class="departing col">
+                Departure Time
+            </div>
+            <div class="arrival col">
+                Arrival Time
+            </div>
+            <div class="select-seat col">
+                Seats
+            </div>
+        </header>
+        @foreach (var flight in Model.Flights)
+        {
+            <div class="row">
+                <div class="origin col">
+                    @flight.Origin
+                </div>
+                <div class="destination col">
+                    @flight.Destination
+                </div>
+                <div class="departing col">
+                    @flight.DepartureTime
+                </div>
+                <div class="arrival col">
+                    @flight.ArrivalTime
+                </div>
+                <div class="select-seat col">
+                    <a class="select-seat-btn" asp-controller="Flights" asp-action="Detail" asp-route-id="@flight.FlightId">Seats</a>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+

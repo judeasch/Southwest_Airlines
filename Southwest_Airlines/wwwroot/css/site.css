@@ -26,6 +26,15 @@ header.top-header, .navbar {
     order: 2; /* This will ensure the logo is on the right */
 }
 
+.footer-text {
+    
+    color: white;
+}
+
+.footer {
+    background-color: #005288;
+}
+
 @media (min-width: 768px) {
     html {
         font-size: 16px;
