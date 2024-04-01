@@ -190,7 +190,14 @@ namespace Southwest_Airlines.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
+            migrationBuilder.AddColumn<int>("FlightID", "Seats", nullable: false);
+            migrationBuilder.AddForeignKey(
+                        name: "FK_SEATS_FLIGHTS_FlightID",
+                        table: "SEATS",
+                        column: "FlightID",
+                        principalTable: "FLIGHTS",
+                        principalColumn: "FlightID",
+                        onDelete: ReferentialAction.NoAction);
             //migrationBuilder.CreateTable(
             //    name: "SEATS",
             //    columns: table => new

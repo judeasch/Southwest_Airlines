@@ -5,11 +5,13 @@
     var seatIndex = 0;
 }
 <head>
-    <link rel="stylesheet" href="~/css/flights.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Flights/detail.css" asp-append-version="true" />
 </head>
 
+<div class="flight-id" id="@Model.FlightId"></div>
 <section id="seatMapContainer" class="seat-map-grid example-flight">
     <h3>Seat Map</h3>
+    <button class="submit">Submit Seat</button>
     <div class="econ-class">
         @for (var i = 0; i < Model.NumberOfRows; i++)
         {
@@ -19,7 +21,7 @@
                     if (e == 3)
                     {
                         <div class="aisle-number">@(i + 1)</div>
-                        <div class="cell seat @Model.Seats.ElementAt(seatIndex).Value" data-seatNum="@Model.Seats.ElementAt(seatIndex).Key">
+                        <div class="cell seat @Model.Seats.ElementAt(seatIndex).Value" id="@Model.Seats.ElementAt(seatIndex).Key">
                             <i class="fa-solid fa-square fa-2x"></i>
                         </div>
                         seatIndex++;
@@ -27,7 +29,7 @@
 
                     else
                     {
-                        <div class="cell seat @Model.Seats.ElementAt(seatIndex).Value" data-seatNum="@Model.Seats.ElementAt(seatIndex).Key">
+                        <div class="cell seat @Model.Seats.ElementAt(seatIndex).Value" id="@Model.Seats.ElementAt(seatIndex).Key">
                             <i class="fa-solid fa-square fa-2x"></i>
                         </div>
                         seatIndex++;
@@ -47,139 +49,7 @@
     </div>
 </section>
 
-@* <section id="seatMapContainer" class="seat-map-grid example-flight">
-    <h3>Seat Map</h3>
-    <h5>First Class</h5>
-    <div class="first-class">
-        <div id="row1" class="row">
-            <div class="cell seat unavailable">
-                <i class="fa-solid fa-square fa-3x"></i>
-            </div>
-            <div class="cell seat available">
-                <i class="fa-solid fa-square fa-3x"></i>
-            </div>
-            <div class="cell aisle-number">1</div>
-            <div class="cell seat available">
-                <i class="fa-solid fa-square fa-3x"></i>
-            </div>
-            <div class="cell seat available">
-                <i class="fa-solid fa-square fa-3x"></i>
-            </div>
-        </div>
-        <div id="row2" class="row">
-            <div class="cell seat available">
-                <i class="fa-solid fa-square fa-3x"></i>
-            </div>
-            <div class="cell seat available">
-                <i class="fa-solid fa-square fa-3x"></i>
-            </div>
-            <div class="cell aisle-number">2</div>
-            <div class="cell seat available">
-                <i class="fa-solid fa-square fa-3x"></i>
-            </div>
-            <div class="cell seat unavailable">
-                <i class="fa-solid fa-square fa-3x"></i>
-            </div>
-        </div>
-    </div>
-    <h5>Main Cabin</h5>
-    <div class="econ-class">
-        <div id="row3" class="row">
-            <div class="cell seat available">
-                <i class="fa-solid fa-square fa-2x"></i>
-            </div>
-            <div class="cell seat available">
-                <i class="fa-solid fa-square fa-2x"></i>
-            </div>
-            <div class="cell seat unavailable">
-                <i class="fa-solid fa-square fa-2x"></i>
-            </div>
-            <div class="aisle-number">3</div>
-            <div class="cell seat unavailable">
-                <i class="fa-solid fa-square fa-2x"></i>
-            </div>
-            <div class="cell seat available">
-                <i class="fa-solid fa-square fa-2x"></i>
-            </div>
-            <div class="cell seat unavailable">
-                <i class="fa-solid fa-square fa-2x"></i>
-            </div>
-        </div>
-        <div id="row4" class="row">
-            <div class="cell seat unavailable">
-                <i class="fa-solid fa-square fa-2x"></i>
-            </div>
-            <div class="cell seat unavailable">
-                <i class="fa-solid fa-square fa-2x"></i>
-            </div>
-            <div class="cell seat available">
-                <i class="fa-solid fa-square fa-2x"></i>
-            </div>
-            <div class="aisle-number">4</div>
-            <div class="cell seat available">
-                <i class="fa-solid fa-square fa-2x"></i>
-            </div>
-            <div class="cell seat available">
-                <i class="fa-solid fa-square fa-2x"></i>
-            </div>
-            <div class="cell seat available">
-                <i class="fa-solid fa-square fa-2x"></i>
-            </div>
-        </div>
-        <div id="row5" class="row">
-            <div class="cell seat available">
-                <i class="fa-solid fa-square fa-2x"></i>
-            </div>
-            <div class="cell seat available">
-                <i class="fa-solid fa-square fa-2x"></i>
-            </div>
-            <div class="cell seat unavailable">
-                <i class="fa-solid fa-square fa-2x"></i>
-            </div>
-            <div class="aisle-number">5</div>
-            <div class="cell seat available">
-                <i class="fa-solid fa-square fa-2x"></i>
-            </div>
-            <div class="cell seat unavailable">
-                <i class="fa-solid fa-square fa-2x"></i>
-            </div>
-            <div class="cell seat unavailable">
-                <i class="fa-solid fa-square fa-2x"></i>
-            </div>
-        </div>
-        <div id="row6" class="row">
-            <div class="cell seat available">
-                <i class="fa-solid fa-square fa-2x"></i>
-            </div>
-            <div class="cell seat available">
-                <i class="fa-solid fa-square fa-2x"></i>
-            </div>
-            <div class="cell seat unavailable">
-                <i class="fa-solid fa-square fa-2x"></i>
-            </div>
-            <div class="aisle-number">6</div>
-            <div class="cell seat available">
-                <i class="fa-solid fa-square fa-2x"></i>
-            </div>
-            <div class="cell seat available">
-                <i class="fa-solid fa-square fa-2x"></i>
-            </div>
-            <div class="cell seat available">
-                <i class="fa-solid fa-square fa-2x"></i>
-            </div>
-        </div>
-    </div>
-    <h5>Key:</h5>
-    <div class="available key">
-        <i class="fa-solid fa-square"></i>
-        <p>Available</p>
-    </div>
-    <div class="unavailable key">
-        <i class="fa-solid fa-square"></i>
-        <p>Unavailable</p>
-    </div>
-</section>
- *@
+
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/flights.js" asp-append-version="true"></script>

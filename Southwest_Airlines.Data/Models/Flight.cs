@@ -15,11 +15,9 @@ public partial class Flight
 
     public int? NumberOfSeats { get; set; }
 
+    public int? TotalNumberOfSeats { get; set; }
+
     public bool? IsAvailable { get; set; }
-
-    public decimal? Price { get; set; }
-
-    public int NumberOfFirstClassSeats { get; set; }
 
     public int FlightId { get; set; }
 

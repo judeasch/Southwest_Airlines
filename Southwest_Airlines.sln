@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Southwest_Airlines", "Southwest_Airlines\Southwest_Airlines.csproj", "{04D88847-E24F-46FA-BDC8-6E73B02AD7A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Southwest_Airlines.Data", "Southwest_Airlines.Data\Southwest_Airlines.Data.csproj", "{728629D6-3202-4141-BEFB-6359E3E814DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Southwest_Airlines.Data", "Southwest_Airlines.Data\Southwest_Airlines.Data.csproj", "{728629D6-3202-4141-BEFB-6359E3E814DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -2,6 +2,15 @@
 
 namespace Southwest_Airlines.Models
 {
+    public class FlightListModel
+    {
+        public List<Flight> Flights { get; set; }
+        public FlightListModel(List<Flight> flights) 
+        {
+            Flights = flights;
+        }
+    }
+
     public class FlightModel
     {
         public int? FlightId { get; set; }

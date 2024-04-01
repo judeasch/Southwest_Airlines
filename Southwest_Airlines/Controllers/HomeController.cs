@@ -27,6 +27,11 @@ namespace Southwest_Airlines.Controllers
             return View();
         }
 
+        public ViewResult About()
+        { 
+            return View(); 
+        }
+
         public IActionResult Privacy()
         {
             return View();
