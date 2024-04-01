@@ -20,6 +20,7 @@ namespace Southwest_Airlines.Controllers
             return View();
         }
 
+        // show Admin.cshtml, a placeholder page to test admin function
         [Authorize(Roles = "Admin")]
         public ViewResult Admin()
         {

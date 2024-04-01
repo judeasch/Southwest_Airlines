@@ -8,6 +8,7 @@ namespace Southwest_Airlines.Controllers
 {
     public class AccountController : Controller
     {
+        // Identity framework built-in properties that allow for logging in and user creation
         private SignInManager<IdentityUser> _signManager;
         private UserManager<IdentityUser> _userManager;
 
@@ -17,12 +18,14 @@ namespace Southwest_Airlines.Controllers
             _signManager = signManager;
         }
 
+        // returns the Register.cshtml view
         [HttpGet]
         public ViewResult Register()
         {
             return View();
         }
 
+        // if ReturnUrl is null, set it to empty string to prevent error
         [HttpGet]
         public IActionResult Login(string returnUrl = "")
         {
@@ -30,6 +33,7 @@ namespace Southwest_Airlines.Controllers
             return View(model);
         }
 
+        // create new user, sign them in, then redirect to home page
         [HttpPost]
         public async Task<IActionResult> Register(RegisterModel model)
         {
@@ -54,6 +58,7 @@ namespace Southwest_Airlines.Controllers
             return View();
         }
 
+        // sign user out and redirect to home page
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> Logout()
@@ -62,6 +67,7 @@ namespace Southwest_Airlines.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        // sign user in, redirecting to the return url if provided, if not redirecting to home page
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel model)
         {

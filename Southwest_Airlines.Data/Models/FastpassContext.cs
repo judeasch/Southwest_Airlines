@@ -22,7 +22,7 @@ public partial class FastpassContext : IdentityDbContext<IdentityUser>
 
     public virtual DbSet<Flight> Flights { get; set; }
 
-    public virtual DbSet<Login> Logins { get; set; }
+    // public virtual DbSet<Login> Logins { get; set; }
 
     public virtual DbSet<Seat> Seats { get; set; }
 
@@ -49,7 +49,7 @@ public partial class FastpassContext : IdentityDbContext<IdentityUser>
                 .IsFixedLength();
             entity.Property(e => e.State).HasMaxLength(50);
 
-            entity.HasOne(d => d.Login).WithMany(p => p.Customers).HasForeignKey(d => d.LoginId);
+            // entity.HasOne(d => d.Login).WithMany(p => p.Customers).HasForeignKey(d => d.LoginId);
         });
 
         modelBuilder.Entity<Flight>(entity =>
@@ -59,17 +59,12 @@ public partial class FastpassContext : IdentityDbContext<IdentityUser>
             entity.Property(e => e.FlightId).HasColumnName("FlightID");
             entity.Property(e => e.Destination).HasMaxLength(50);
             entity.Property(e => e.Origin).HasMaxLength(50);
-            entity.Property(e => e.Price).HasColumnType("money");
         });
 
-        modelBuilder.Entity<Login>(entity =>
-        {
-            entity.ToTable("LOGINS");
-
-            entity.Property(e => e.LoginId).HasColumnName("LoginID");
-            entity.Property(e => e.Password).HasMaxLength(50);
-            entity.Property(e => e.Username).HasMaxLength(50);
-        });
+        //modelBuilder.Entity<Login>(entity =>
+        //{
+        //    entity.ToTable("LOGINS");
+        //});
 
         modelBuilder.Entity<Seat>(entity =>
         {

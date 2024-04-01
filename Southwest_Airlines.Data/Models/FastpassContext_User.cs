@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Southwest_Airlines.Data.Models
 {
+    // todo: this can be merged with FastpassContext.cs now that we are using code-first and not scaffolding
     public partial class FastpassContext : IdentityDbContext<IdentityUser>
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
