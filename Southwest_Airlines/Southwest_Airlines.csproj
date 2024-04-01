@@ -22,7 +22,9 @@
   <ItemGroup>
 	<ProjectReference Include="..\Southwest_Airlines.Data\Southwest_Airlines.Data.csproj" />
   </ItemGroup>
+
   <ItemGroup>
 	<Folder Include="wwwroot\images\" />
   </ItemGroup>
+
 </Project>
