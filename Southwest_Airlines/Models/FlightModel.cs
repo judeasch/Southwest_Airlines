@@ -2,6 +2,15 @@
 
 namespace Southwest_Airlines.Models
 {
+    public class FlightListModel
+    {
+        public List<Flight> Flights { get; set; }
+        public FlightListModel(List<Flight> flights) 
+        {
+            Flights = flights;
+        }
+    }
+
     public class FlightModel
     {
         public int? FlightId { get; set; }
@@ -15,7 +24,7 @@ namespace Southwest_Airlines.Models
             List<string?> seatNumList = seats.Select(s => s.SeatNumber).ToList();
             FlightId = flight.FlightId;
             NumberOfSeats = flight.NumberOfSeats;
-            NumberOfRows = flight.NumberOfSeats / 6;
+            NumberOfRows = flight.NumberOfSeats / 6;  // todo: add functionality for when numberofseats isn't multiple of 6
             
             
             for (int i = 1; i <= NumberOfSeats; i++)
@@ -31,17 +40,16 @@ namespace Southwest_Airlines.Models
                 }               
                     
             }
-            
-            
+                       
             Seats = ConvertSeatNumbers(initialSeats);
         }
 
+        // todo: maybe put this in a list of helper methods?
         public Dictionary<string, string> ConvertSeatNumbers(Dictionary<string, string> seats) 
         {
             Dictionary<string, string> convertedSeats = new Dictionary<string, string>();
-            // var totalrows = NumberOfSeats / 6;   // 6 seats to a row
-            string[] letters = ["a", "b", "c", "d", "e", "f"];
-            var count = 0;
+            string[] letters = ["A", "B", "C", "D", "E", "F"];  // airplane seats have a number followed by a letter, ex: 1A, 3C, etc
+            var count = 0; // keep track of the current index in seats
 
             for (var i = 0; i < NumberOfRows; i++)
             {
@@ -49,7 +57,7 @@ namespace Southwest_Airlines.Models
                 {
                     var seatNum = seats.ElementAt(count).Key;
                     seatNum += letters[e];
-                    convertedSeats.Add(seatNum, seats.ElementAt(count).Value);
+                    convertedSeats.Add(seatNum, seats.ElementAt(count).Value); // format seat number correctly and add to dict
                     count++;
                 }                    
             }

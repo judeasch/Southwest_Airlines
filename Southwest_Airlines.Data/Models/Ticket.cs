@@ -3,8 +3,14 @@ using System.Collections.Generic;
 
 namespace Southwest_Airlines.Data.Models;
 
-public partial class Ticket
+public class Ticket
 {
+    public Ticket(int? seatId, int? flightId, int? customerId) 
+    { 
+        SeatId = seatId;
+        FlightId = flightId;
+        CustomerId = customerId;
+    }
     public int? CustomerId { get; set; }
 
     public int? FlightId { get; set; }

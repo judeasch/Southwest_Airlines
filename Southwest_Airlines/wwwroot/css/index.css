@@ -1,4 +1,4 @@
-﻿
+
 div.login {
     display: flex;
     align-items: center;
@@ -10,6 +10,45 @@ div.login {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
     width: 300px; 
     margin: auto; /* Centers the div if within a flex or block container */
+}
+/* Navigation bar styling */
+.navbar {
+    background-color: #25559b; /* A slightly different shade of blue for visual interest */
+    overflow: hidden;
+}
+
+    .navbar ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+        .navbar ul li {
+            float: left;
+        }
+
+
+            .navbar ul li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+                .navbar ul li a.active,
+                .navbar ul li a:hover {
+                    background-color: #ffbf00; /* A vibrant yellow for active/hover states */
+                }
+
+
+/* Main content styling */
+.main-content {
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 

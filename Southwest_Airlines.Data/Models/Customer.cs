@@ -25,11 +25,9 @@ public partial class Customer
 
     public string? Address { get; set; }
 
-    public int? LoginId { get; set; }
-
     public int CustomerId { get; set; }
 
-    public virtual Login? Login { get; set; }
+    public string LoginId { get; set; }
 
     public virtual ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
 }

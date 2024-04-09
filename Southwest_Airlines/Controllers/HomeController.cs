@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Southwest_Airlines.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Southwest_Airlines.Controllers
 {
+    // Shows views for the landing page (and temporary admin page)
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -13,7 +15,19 @@ namespace Southwest_Airlines.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public ViewResult Index()
+        {
+            return View();
+        }
+
+        // show Admin.cshtml, a placeholder page to test admin function
+        [Authorize(Roles = "Admin")]
+        public ViewResult Admin()
+        {
+            return View();
+        }
+
+        public ViewResult About()
         {
             return View();
         }

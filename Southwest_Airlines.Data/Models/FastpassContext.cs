@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace Southwest_Airlines.Data.Models;
 
-public partial class FastpassContext : DbContext
+public partial class FastpassContext : IdentityDbContext<IdentityUser>
 {
     public FastpassContext()
     {
@@ -20,23 +22,12 @@ public partial class FastpassContext : DbContext
 
     public virtual DbSet<Flight> Flights { get; set; }
 
-    public virtual DbSet<Login> Logins { get; set; }
+    // public virtual DbSet<Login> Logins { get; set; }
 
     public virtual DbSet<Seat> Seats { get; set; }
 
     public virtual DbSet<Ticket> Tickets { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        var configuration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json")
-            .Build();
-
-        var connectionString = configuration.GetConnectionString("SAConnection");
-        optionsBuilder.UseSqlServer(connectionString);
-    }
-
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Customer>(entity =>
@@ -58,9 +49,7 @@ public partial class FastpassContext : DbContext
                 .IsFixedLength();
             entity.Property(e => e.State).HasMaxLength(50);
 
-            entity.HasOne(d => d.Login).WithMany(p => p.Customers)
-                .HasForeignKey(d => d.LoginId)
-                .OnDelete(DeleteBehavior.Cascade);
+            // entity.HasOne(d => d.Login).WithMany(p => p.Customers).HasForeignKey(d => d.LoginId);
         });
 
         modelBuilder.Entity<Flight>(entity =>
@@ -70,17 +59,12 @@ public partial class FastpassContext : DbContext
             entity.Property(e => e.FlightId).HasColumnName("FlightID");
             entity.Property(e => e.Destination).HasMaxLength(50);
             entity.Property(e => e.Origin).HasMaxLength(50);
-            entity.Property(e => e.Price).HasColumnType("money");
         });
 
-        modelBuilder.Entity<Login>(entity =>
-        {
-            entity.ToTable("LOGINS");
-
-            entity.Property(e => e.LoginId).HasColumnName("LoginID");
-            entity.Property(e => e.Password).HasMaxLength(50);
-            entity.Property(e => e.Username).HasMaxLength(50);
-        });
+        //modelBuilder.Entity<Login>(entity =>
+        //{
+        //    entity.ToTable("LOGINS");
+        //});
 
         modelBuilder.Entity<Seat>(entity =>
         {
@@ -120,7 +104,7 @@ public partial class FastpassContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade);
         });
 
-        OnModelCreatingPartial(modelBuilder);
+        base.OnModelCreating(modelBuilder);
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
