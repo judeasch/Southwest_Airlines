@@ -1,4 +1,5 @@
-﻿section {
+﻿p.unavailable-msg {
+    color: red;
 }
 
 div .seat-map-grid {

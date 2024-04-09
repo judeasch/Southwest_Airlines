@@ -11,7 +11,15 @@
 <div class="flight-id" id="@Model.FlightId"></div>
 <section id="seatMapContainer" class="seat-map-grid example-flight">
     <h3>Seat Map</h3>
-    <button class="submit">Submit Seat</button>
+    @if (Model.TotalNumberOfSeats > 0)
+    {
+        <button class="submit">Submit Seat</button>
+    }
+    else
+    {
+        <p class="unavailable-msg">Sorry, it looks like this flight has no available seats. You can look for other flights <a asp-controller="Flights" asp-action="Index">here.</a></p>
+    }
+
     <div class="econ-class">
         @for (var i = 0; i < Model.NumberOfRows; i++)
         {

@@ -14,6 +14,7 @@ namespace Southwest_Airlines.Models
     public class FlightModel
     {
         public int? FlightId { get; set; }
+        public int? TotalNumberOfSeats { get; set; }
         public int? NumberOfSeats { get; set; }
         public int? NumberOfRows { get; set; }
         public Dictionary<string, string> Seats { get; set; } = new Dictionary<string, string>();
@@ -23,6 +24,7 @@ namespace Southwest_Airlines.Models
             Dictionary<string, string> initialSeats = new Dictionary<string, string>();
             List<string?> seatNumList = seats.Select(s => s.SeatNumber).ToList();
             FlightId = flight.FlightId;
+            TotalNumberOfSeats = flight.TotalNumberOfSeats;
             NumberOfSeats = flight.NumberOfSeats;
             NumberOfRows = flight.NumberOfSeats / 6;  // todo: add functionality for when numberofseats isn't multiple of 6
             
@@ -51,11 +53,11 @@ namespace Southwest_Airlines.Models
             string[] letters = ["A", "B", "C", "D", "E", "F"];  // airplane seats have a number followed by a letter, ex: 1A, 3C, etc
             var count = 0; // keep track of the current index in seats
 
-            for (var i = 0; i < NumberOfRows; i++)
+            for (var i = 1; i <= NumberOfRows; i++)
             {
                 for (var e = 0; e < 6; e++)
                 {
-                    var seatNum = seats.ElementAt(count).Key;
+                    var seatNum = i.ToString();
                     seatNum += letters[e];
                     convertedSeats.Add(seatNum, seats.ElementAt(count).Value); // format seat number correctly and add to dict
                     count++;

@@ -67,8 +67,6 @@ namespace Southwest_Airlines.Controllers
             var row = Convert.ToInt32(seatNum.Substring(0, seatNum.Length - 1)); // get the row number, so all chars except the letter
             var seatNumInt = (row * 6) - offsetValue;
 
-            // _flight = _context.Set<Flight>().Find(flightId);
-
             if (_flight != null && _flight.TotalNumberOfSeats > 0)
             {
                 Seat seat = new Seat(seatNumInt.ToString(), _flight.FlightId);
