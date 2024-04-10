@@ -1,83 +1,74 @@
 
-div.login {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background-color: #ffffff; /* Assuming a white background */
-    padding: 20px;
-    border-radius: 4px; /* Optional: if you want rounded corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-    width: 300px; 
-    margin: auto; /* Centers the div if within a flex or block container */
-}
-/* Navigation bar styling */
-.navbar {
-    background-color: #25559b; /* A slightly different shade of blue for visual interest */
-    overflow: hidden;
+
+/* General body styling */
+html {
+    font-size: 22px;
+    color: #111B40;
+    
 }
 
-    .navbar ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-    }
 
-        .navbar ul li {
-            float: left;
-        }
+body {
+    min-height: 100vh;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1rem;
+    background-image: url('../~/images/blueScreen.png');
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: 75%;
+    background-position: center;
+}
+.heading {
+    text-align: center;
+    border: 5px solid #FFBF27;
+    background-color: #FFBF27;
+    position: relative;
+    top: 200px;
+}
+.header-logo {
+    max-width: 700px; /* Makes the first image small */
+    padding: 3px;
+    background-color: rgb(255, 191, 39);
+    border-radius: 5px; 
+}
 
+.welcome-message {
+    color: #ffbf27;
+    margin-bottom: 2rem; /* Adjust size as necessary */
+}
 
-            .navbar ul li a {
-                display: block;
-                color: white;
-                text-align: center;
-                padding: 14px 16px;
-                text-decoration: none;
-            }
-
-                .navbar ul li a.active,
-                .navbar ul li a:hover {
-                    background-color: #ffbf00; /* A vibrant yellow for active/hover states */
-                }
-
-
-/* Main content styling */
-.main-content {
-    padding: 20px;
-    margin-top: 20px;
-    background-color: #ffffff;
+.main-content, .home-content2 {
+    background-color: #111B40; /* Dark blue color */
+    color: blue; /* Text color for better readability */
+    padding: 1rem;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 1rem;
 }
 
 
-div.row {
-    margin-bottom: 15px;
-    width: 100%; /* Ensures it takes up full available width */
+.learnmore { /* Corrected class name to match HTML */
+    display: inline-block;
+    background-color: #ffbf27; /* Southwest's yellow color */
+    color: #111B40; /* Dark blue color for the text */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    font-weight: bold; /* Makes the link text bold */
 }
 
-/* Style for the login button */
-button.login-button {
-    background-color: #ffbf27; 
-    color: #111b40; 
-    border: none; /* Removing border for a flat design */
-    border-radius: 4px; /* Rounded corners for the button */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-    padding: 10px 20px; 
-    font-weight: bold; 
-    font-size: 1rem; 
-    cursor: pointer; /
-    transition: background-color 0.3s ease; 
+.learn-more:hover {
+    background-color: #e6ac00;
 }
 
-/* Hover effect for the login button */
-button.login-button:hover {
-    background-color: #e0a800; /* Slightly darker yellow on hover */
+.p2 {
+    color: white;
 }
 
 
-button.login-button:focus {
-    outline: 2px solid #ffbf27; /* Adding an outline to indicate focus */
-    outline-offset: 2px; 
+
+.main-content {
+    background-color: #111B40; /* SouthWest blue color */
+    padding: 2rem;
 }
