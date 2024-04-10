@@ -1,4 +1,5 @@
 
+
 /* General body styling */
 html {
     font-size: 22px;
@@ -70,65 +71,4 @@ body {
 .main-content {
     background-color: #111B40; /* SouthWest blue color */
     padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center align the content */
-    justify-content: space-between; /* Space the content out evenly */
-}
-/* Navigation bar styling */
-.navbar {
-    background-color: #25559b; /* A slightly different shade of blue for visual interest */
-    overflow: hidden;
-}
-
-    .navbar ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-    }
-
-        .navbar ul li {
-            float: left;
-        }
-
-
-            .navbar ul li a {
-                display: block;
-                color: white;
-                text-align: center;
-                padding: 14px 16px;
-                text-decoration: none;
-            }
-
-                .navbar ul li a.active,
-                .navbar ul li a:hover {
-                    background-color: #ffbf00; /* A vibrant yellow for active/hover states */
-                }
-
-
-/* Main content styling */
-.main-content {
-    padding: 20px;
-    margin-top: 20px;
-    background-color: #ffffff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-/* Footer styling */
-footer {
-    background-color: #005288; 
-    color: white;
-    text-align: center;
-    padding: 10px;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
-
-/* Responsive design adjustments */
-@media screen and (max-width: 600px) {
-    .navbar ul li {
-        float: none;
-    }
 }
