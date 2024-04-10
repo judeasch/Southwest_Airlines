@@ -1,0 +1,25 @@
+﻿html {
+    font-size: 22px;
+    color: #111B40;
+}
+
+
+body {
+    min-height: 100vh;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1rem;
+    background-image: url('../~/images/blueScreen.png');
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: 75%;
+    background-position: center;
+}
+
+.heading {
+    text-align: center;
+    border: 5px solid #FFBF27;
+    background-color: #FFBF27;
+    position: relative;
+    top: 200px;
+}
