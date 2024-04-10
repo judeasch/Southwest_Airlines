@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Southwest_Airlines.Data.Models;
 
-public partial class FastpassContext : IdentityDbContext<IdentityUser>
+public partial class FastpassContext : IdentityDbContext<ApplicationUser>
 {
     public FastpassContext()
     {
@@ -27,9 +27,17 @@ public partial class FastpassContext : IdentityDbContext<IdentityUser>
     public virtual DbSet<Seat> Seats { get; set; }
 
     public virtual DbSet<Ticket> Tickets { get; set; }
+    public virtual DbSet<Fastpass> Fastpasses { get; set; }
+    public virtual DbSet<PaymentInfo> PaymentInfo { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
+        modelBuilder.Entity<ApplicationUser>(entity =>
+        {
+            entity.HasOne(d => d.Customer).WithOne(p => p.User).HasForeignKey<Customer>(d => d.UserId);
+        });
+
         modelBuilder.Entity<Customer>(entity =>
         {
             entity.ToTable("CUSTOMERS");
@@ -40,7 +48,6 @@ public partial class FastpassContext : IdentityDbContext<IdentityUser>
             entity.Property(e => e.Email).HasMaxLength(50);
             entity.Property(e => e.FirstName).HasMaxLength(50);
             entity.Property(e => e.LastName).HasMaxLength(50);
-            entity.Property(e => e.LoginId).HasColumnName("LoginID");
             entity.Property(e => e.PhoneNumber)
                 .HasMaxLength(10)
                 .IsFixedLength();
@@ -49,7 +56,7 @@ public partial class FastpassContext : IdentityDbContext<IdentityUser>
                 .IsFixedLength();
             entity.Property(e => e.State).HasMaxLength(50);
 
-            // entity.HasOne(d => d.Login).WithMany(p => p.Customers).HasForeignKey(d => d.LoginId);
+            
         });
 
         modelBuilder.Entity<Flight>(entity =>
@@ -101,6 +108,36 @@ public partial class FastpassContext : IdentityDbContext<IdentityUser>
 
             entity.HasOne(d => d.Seat).WithMany(p => p.Tickets)
                 .HasForeignKey(d => d.SeatId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        modelBuilder.Entity<Fastpass>(entity =>
+        {
+            entity.ToTable("FASTPASSES");
+
+            entity.Property(e => e.FastpassId).HasColumnName("FastpassID");
+            entity.Property(e => e.TicketId).HasColumnName("TicketID");
+            entity.Property(e => e.ValidFrom).HasColumnType("datetime");
+            entity.Property(e => e.ValidUntil).HasColumnType("datetime");
+
+            entity.HasOne(d => d.Ticket).WithMany(p => p.Fastpasses)
+                .HasForeignKey(d => d.TicketId)
+                .OnDelete(DeleteBehavior.Cascade);            
+        });
+
+        modelBuilder.Entity<PaymentInfo>(entity =>
+        {
+            entity.ToTable("PAYMENTINFO");
+
+            entity.Property(e => e.PaymentInfoId).HasColumnName("PaymentInfoID");
+            entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
+            entity.Property(e => e.CardholderName).HasMaxLength(240);
+            entity.Property(e => e.PaymentMethod).HasMaxLength(50);
+            entity.Property(e => e.CardNumber).HasMaxLength(50);
+            entity.Property(e => e.ExpiryDate).HasColumnType("date");
+
+            entity.HasOne(d => d.Customer).WithMany(p => p.PaymentInfo)
+                .HasForeignKey(d => d.CustomerId)
                 .OnDelete(DeleteBehavior.Cascade);
         });
 

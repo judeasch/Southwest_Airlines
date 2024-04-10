@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using Southwest_Airlines.Data.Migrations;
+using System;
 using System.Collections.Generic;
 
 namespace Southwest_Airlines.Data.Models;
@@ -26,8 +28,10 @@ public partial class Customer
     public string? Address { get; set; }
 
     public int CustomerId { get; set; }
+    public string? UserId { get; set; }
 
-    public string LoginId { get; set; }
 
+    public virtual ApplicationUser User { get; set; }
     public virtual ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
+    public virtual ICollection<PaymentInfo> PaymentInfo { get; set; } = new List<PaymentInfo>();
 }

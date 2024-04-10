@@ -14,9 +14,9 @@ namespace Southwest_Airlines.Controllers
     {
         private readonly FastpassContext _context; // dbcontext allows to perform crud operations on database
         private Flight _flight; // gets set in Detail and is used to create a seat in UpdateSeat
-        private UserManager<IdentityUser> _userManager;
+        private UserManager<ApplicationUser> _userManager;
 
-        public FlightsController(FastpassContext context, UserManager<IdentityUser> userManager)
+        public FlightsController(FastpassContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -49,7 +49,7 @@ namespace Southwest_Airlines.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateSeat(string seatNum, int flightId)
+        public async Task<IActionResult> UpdateSeat(string seatNum, int flightId)
         {
             Dictionary<string, int> letterValues = new Dictionary<string, int>()
             {
@@ -73,10 +73,10 @@ namespace Southwest_Airlines.Controllers
                 _context.Seats.Add(seat);
                 _context.SaveChanges(); // save Seat changes here so that we can create a new Ticket
 
-                // var user = _userManager.GetUserAsync(User);
-                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var user = await _userManager.GetUserAsync(User);
+                var userId = user.Id;
                 var customer = _context.Customers
-                    .Where(u => u.LoginId == userId)
+                    .Where(u => u.UserId == userId)
                     .FirstOrDefault();
 
                 if (customer != null)

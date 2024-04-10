@@ -1,0 +1,64 @@
+﻿@using Southwest_Airlines.Data.Models;
+@model TicketListModel
+@{
+    ViewData["Title"] = "Tickets";
+}
+<head>
+    <link rel="stylesheet" href="~/css/Tickets/index.css" asp-append-version="true" />
+</head>
+
+<section class="flights">
+    <h1>Purchased Tickets</h1>
+    <div class="flight-grid">
+        <header>
+            <div class="origin col">
+                Origin
+            </div>
+            <div class="destination col">
+                Destination
+            </div>
+            <div class="departing col">
+                Departure Time
+            </div>
+            <div class="arrival col">
+                Arrival Time
+            </div>
+            <div class="select-seat col">
+                Seat Number
+            </div>
+            <div class="purchase-fastpass col">
+                Purchase Fastpass
+            </div>
+        </header>
+        @foreach (var ticket in Model.Tickets)
+        {
+            var flight = Model.Flights.FirstOrDefault(i => ticket.FlightId == i.FlightId);
+            var seat = Model.Seats.FirstOrDefault(i => ticket.SeatId == i.SeatId);
+
+            if (flight != null && seat != null)
+            {
+                <div class="row">
+                    <div class="origin col">
+                        @flight.Origin
+                    </div>
+                    <div class="destination col">
+                        @flight.Destination
+                    </div>
+                    <div class="departing col">
+                        @flight.DepartureTime
+                    </div>
+                    <div class="arrival col">
+                        @flight.ArrivalTime
+                    </div>
+                    <div class="select-seat col">
+                        @seat.SeatNumber
+                    </div>
+                    <div class="purchase-fastpass col">
+                        <a class="purchase-fastpass-btn" asp-controller="Fastpasses" asp-action="Detail" asp-route-id="@ticket.TicketId">Purchase Fastpass</a>
+                    </div>
+                </div>
+            }            
+        }
+    </div>
+</section>
+

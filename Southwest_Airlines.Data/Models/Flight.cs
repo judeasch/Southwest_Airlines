@@ -10,9 +10,9 @@ public partial class Flight
 
     public string? Destination { get; set; }
 
-    public DateTime? DepartureTime { get; set; }
+    public DateTime DepartureTime { get; set; }
 
-    public DateTime? ArrivalTime { get; set; }
+    public DateTime ArrivalTime { get; set; }
 
     public int? NumberOfSeats { get; set; }
 

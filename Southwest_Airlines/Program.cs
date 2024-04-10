@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<FastpassContext>(options => 
       options.UseSqlServer(builder.Configuration.GetConnectionString("SAConnection")));  // connect FastpassContext (inherits from auto-scaffolded context)
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
       .AddEntityFrameworkStores<FastpassContext>(); // add identity framework to IdentityUser which allows it to use IdentityRole
 
 var app = builder.Build();

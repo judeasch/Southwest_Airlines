@@ -31,7 +31,11 @@
                         </li>
                         
                             @if (User.Identity.IsAuthenticated)
-                            {
+                            { 
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Tickets" asp-action="Index" asp-route-id="@User.FindFirstValue(ClaimTypes.NameIdentifier)">My Tickets</a>
+                                </li>
+
                                 if (User.IsInRole("Admin"))
                                 {
                                     <li class="nav-item">

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using System.Diagnostics;
 using Southwest_Airlines.Models;
+using Southwest_Airlines.Data.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace Southwest_Airlines.Controllers
@@ -9,10 +10,10 @@ namespace Southwest_Airlines.Controllers
     public class AccountController : Controller
     {
         // Identity framework built-in properties that allow for logging in and user creation
-        private SignInManager<IdentityUser> _signManager;
-        private UserManager<IdentityUser> _userManager;
+        private SignInManager<ApplicationUser> _signManager;
+        private UserManager<ApplicationUser> _userManager;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signManager)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signManager)
         {
             _userManager = userManager;
             _signManager = signManager;
@@ -39,7 +40,7 @@ namespace Southwest_Airlines.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = model.Username };
+                var user = new ApplicationUser { UserName = model.Username };
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)

@@ -30,4 +30,6 @@ public class Ticket
     public virtual Flight? Flight { get; set; }
 
     public virtual Seat? Seat { get; set; }
+
+    public virtual ICollection<Fastpass> Fastpasses { get; set; } = new List<Fastpass>();
 }
