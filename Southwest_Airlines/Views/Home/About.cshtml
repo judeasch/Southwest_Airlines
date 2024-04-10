@@ -1,55 +1,45 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="author" content="Team Flight Attendant">
-    <meta name="description" content="Learn more about SouthWest FastPass Airline and its revolutionary Fast Pass service.">
-    <link rel="stylesheet" href="~/css/index.css">
-    <title>SouthWest Fast Airline - About Us</title>
-    <link rel="icon" type="image/x-icon" href="~/images/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn more about FastPass and PaymentInfo services to make your travel with Southwest Airlines smoother and more convenient.">
+    <title>Learn More About FastPass and PaymentInfo - Southwest Airlines</title>
+    <link rel="stylesheet" href="~/css/about.css">
+
+    
 </head>
 <body>
-    
+    <header class="page-header">
+        <div class="container">
+            <img src="~/images/SWFastPass.png" alt="Illustration of FastPass benefits" class="info-image">
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/About">About Us</a></li>
+          
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-    <div class="About-content">
-        <h2>Learn More About SouthWest Fast Airlines</h2>
-        <img src="~/images/SWLOGO2.jpeg" alt="SWFastAir" class="header-logo">
-        <section>
-            <p></p>
+    <main class="container">
+        <section class="fastpass-info">
+            <h2>FastPass - Your Ticket to Speedier Travel</h2>
+            <p>
+                The Southwest FastPass service is designed for travelers looking for speed and efficiency. With FastPass, you can enjoy expedited security checks, priority boarding, and early access to overhead bin space. This service is perfect for those who value their time and prefer a streamlined airport experience. Add FastPass to your booking to minimize wait times and maximize comfort.
+            </p>
+            <img src="~/images/SWLOGO2.jpeg" alt="Southwest Airlines Logo" class="logo">
         </section>
 
-        <main class="main-content">
-            <section class="home-content1">
-                <p class="p2">
-                    Enjoy the Swift Service of Southwest Fast Air: Travel Quickly, Travel Conveniently!
-                </p>
-                <a class="learnmore" asp-controller="Home" asp-action="About">
-                    LearnMore
-                </a>
-
-
-            </section>
-
-            <section class="home-content2">
-                <div class="text-content">
-                    <p class="p2">
-                        With your Fast Pass, you're in command of your travels!
-                        Pick out any dates that work for you to breeze through the airport with faster access.
-                        The Southwest Fast Airline Pass is tailored to elevate your travel routine, granting you
-                        expedited service that caters to your need for quick and effortless passage. It's all about making your journey as smooth as possible, with you at the helm.
-                    </p>
-                    <p class="p2">
-                        Step into a new chapter of travel with us,
-                        where every minute is valuable and each voyage is a pleasure.
-                        The SouthWest Fast Airline Fast Pass represents more than just a service — it's a promise to enhance
-                        your experience with Southwest Airlines, ensuring smooth sailing from start to finish. Unveil a fresh
-                        standard of traveling convenience with SW Fast Air — because your adventure is significant.
-                    </p>
-                </div>
-                <img src="~/images/girl.jpg" alt="Customer enjoying travel" class="content-image">
-            </section>
-        </main>
-
+        <section class="payment-info">
+            <h2>Payment - Secure and Convenient Payment Processing</h2>
+            <p>
+                At Southwest Airlines, we prioritize your security and convenience. Our PaymentInfo system ensures that your payment information is processed securely, with the latest encryption and data protection measures. Whether you're booking a flight, adding extra services like FastPass, or shopping for in-flight amenities, PaymentInfo keeps your financial details safe and your transactions smooth. Explore our range of payment options designed to suit your preferences and needs.
+            </p>
+            <img src="~/images/SW_PAY.jpeg" alt="Secure payment processing illustration" class="info-image">
+        </section>
+    </main>
 
 </body>
 </html>

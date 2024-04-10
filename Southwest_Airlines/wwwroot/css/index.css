@@ -18,22 +18,33 @@ body {
     background-size: 75%;
     background-position: center;
 }
-
+.heading {
+    text-align: center;
+    border: 5px solid #FFBF27;
+    background-color: #FFBF27;
+    position: relative;
+    top: 200px;
+}
 .header-logo {
-    max-width: 200px; /* Makes the first image small */
+    max-width: 700px; /* Makes the first image small */
     padding: 3px;
     background-color: rgb(255, 191, 39);
-    border-radius: 5px; /* Optional: Rounds the corners of the image background */
+    border-radius: 5px; 
 }
 
 .welcome-message {
-    margin-left: 1.5px; /* Adjust size as necessary */
+    color: #ffbf27;
+    margin-bottom: 2rem; /* Adjust size as necessary */
 }
 
-.home-content1 .p2 {
-    text-align: center; /* Centers your paragraph */
-    /* ... other styles for p2 ... */
+.main-content, .home-content2 {
+    background-color: #111B40; /* Dark blue color */
+    color: blue; /* Text color for better readability */
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
 }
+
 
 .learnmore { /* Corrected class name to match HTML */
     display: inline-block;
@@ -49,6 +60,7 @@ body {
 .learn-more:hover {
     background-color: #e6ac00;
 }
+
 
 
 .main-content {
