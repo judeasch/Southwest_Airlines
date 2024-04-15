@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Southwest_Airlines.Data.Models
 {
+    // extends Asp.Net identityUser
     public class ApplicationUser : IdentityUser
     {
         public virtual Customer? Customer { get; set; }

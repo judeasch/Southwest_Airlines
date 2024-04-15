@@ -2,6 +2,7 @@
 
 namespace Southwest_Airlines.Models
 {
+    // to view all available Flights
     public class FlightListModel
     {
         public List<Flight> Flights { get; set; }
@@ -11,6 +12,7 @@ namespace Southwest_Airlines.Models
         }
     }
 
+    // to view a particular flight's seats
     public class FlightModel
     {
         public int? FlightId { get; set; }

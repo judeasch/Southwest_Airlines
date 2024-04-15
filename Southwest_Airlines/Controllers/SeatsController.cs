@@ -13,6 +13,8 @@ namespace Southwest_Airlines.Controllers
         { 
             _context = context;
         }
+
+        // View all available seats
         public IActionResult Index(int id)
         {
             return View();

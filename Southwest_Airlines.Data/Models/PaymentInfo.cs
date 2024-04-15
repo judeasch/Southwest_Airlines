@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Southwest_Airlines.Data.Models
@@ -16,14 +17,18 @@ namespace Southwest_Airlines.Data.Models
         public string? CardNumber { get; set; }
         public DateOnly ExpiryDate { get; set; }
 
+        [JsonIgnore]
+        public int TicketId { get; set; }
+
         public virtual Customer Customer { get; set; }
 
         // Constructors
         public PaymentInfo() { }
 
-        public PaymentInfo(int customerId)
+        public PaymentInfo(int customerId, int ticketId) // constructor for UpdateFastpass
         {
             CustomerId = customerId;
+            TicketId = ticketId;
         }
 
         public PaymentInfo(int customerId, string paymentMethod, string cardholderName, string cardNumber, DateOnly expiryDate)

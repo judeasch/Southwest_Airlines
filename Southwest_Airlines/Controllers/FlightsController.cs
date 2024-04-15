@@ -65,9 +65,9 @@ namespace Southwest_Airlines.Controllers
 
             var offsetValue = letterValues[seatNum[seatNum.Length - 1].ToString()]; // get last char of seatNum, which is the letter
             var row = Convert.ToInt32(seatNum.Substring(0, seatNum.Length - 1)); // get the row number, so all chars except the letter
-            var seatNumInt = (row * 6) - offsetValue;
+            var seatNumInt = (row * 6) - offsetValue; // get the seat number as an int
 
-            if (_flight != null && _flight.TotalNumberOfSeats > 0)
+            if (_flight != null && _flight.TotalNumberOfSeats > 0) // check if there are still seats available
             {
                 Seat seat = new Seat(seatNumInt.ToString(), _flight.FlightId);
                 _context.Seats.Add(seat);
@@ -84,7 +84,7 @@ namespace Southwest_Airlines.Controllers
                     Ticket ticket = new Ticket(seat.SeatId, _flight.FlightId, customer.CustomerId);
                     _context.Tickets.Add(ticket);
 
-                    var numOfSeats = _flight.TotalNumberOfSeats - 1;
+                    var numOfSeats = _flight.TotalNumberOfSeats - 1; // update number of available seats on the flight
                     _flight.TotalNumberOfSeats = numOfSeats;
                     _context.SaveChanges();
                 }

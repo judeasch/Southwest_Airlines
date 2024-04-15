@@ -11,6 +11,7 @@
 
 <form method="post" asp-controller="Fastpasses" asp-action="UpdateFastpass">
     <div asp-validation-summary="ModelOnly"></div>
+    <input type="hidden" asp-for="CustomerId" value="@Model.CustomerId" />
     <div class="payment-info">
         <div class="row">
             <label asp-for="CardholderName">Full Name on Card</label>

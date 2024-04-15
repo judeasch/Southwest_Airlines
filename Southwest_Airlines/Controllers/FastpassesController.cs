@@ -29,13 +29,16 @@ namespace Southwest_Airlines.Controllers
             _customer = _context.Customers
                 .Where(u => u.CustomerId == _ticket.CustomerId)
                 .FirstOrDefault();
-            _flight = _context.Flights
-                .Where(u => u.FlightId == _ticket.FlightId)
-                .FirstOrDefault();
+            
+            if (_ticket != null)
+            {
+                // create model w/ CustomerId and TicketId already set so they can be used in UpdateFastpass
+                PaymentInfo paymentInfo = new PaymentInfo(_customer.CustomerId, _ticket.TicketId);
 
-            PaymentInfo paymentInfo = new PaymentInfo(_customer.CustomerId);
-
-            return View("~/Views/PaymentInfo/Detail.cshtml", paymentInfo);
+                return View("~/Views/PaymentInfo/Detail.cshtml", paymentInfo);
+            }
+            // todo: redirect to an error page
+            return View("~/Views/PaymentInfo/Detail.cshtml");
         }
 
         [HttpPost]
@@ -45,14 +48,19 @@ namespace Southwest_Airlines.Controllers
             // check if customer already has payment info on file
             var checkExists = _context.PaymentInfo
                 .Where(p => p.CustomerId == model.CustomerId).FirstOrDefault();
-            if (checkExists != null)
+            if (checkExists == null)
             {
+                // create new PaymentInfo for that Customer
                 PaymentInfo paymentInfo = new PaymentInfo(model.CustomerId, model.PaymentMethod, model.CardholderName, model.CardNumber, model.ExpiryDate);
                 _context.PaymentInfo.Add(paymentInfo);
                 _context.SaveChanges();
             }
 
             // todo: 'send off' credit card data here?
+            _ticket = _context.Set<Ticket>().Find(model.TicketId);
+            _flight = _context.Flights
+                .Where(u => u.FlightId == _ticket.FlightId)
+                .FirstOrDefault();
 
             var validFrom = _flight.DepartureTime;
             var validUntil = _flight.ArrivalTime;
@@ -61,7 +69,7 @@ namespace Southwest_Airlines.Controllers
             _context.Fastpasses.Add(fastpass);
             _context.SaveChanges();
 
-            return View("~/Views/Home/Index.cshtml");
+            return View("~/Views/Home/Index.cshtml"); // redirect to Home page
         }
     }
 }
