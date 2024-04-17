@@ -34,6 +34,7 @@
         {
             var flight = Model.Flights.FirstOrDefault(i => ticket.FlightId == i.FlightId);
             var seat = Model.Seats.FirstOrDefault(i => ticket.SeatId == i.SeatId);
+            var fastpass = Model.Fastpasses.FirstOrDefault(i => ticket.TicketId == i.TicketId) != null ? Model.Fastpasses.FirstOrDefault(i => ticket.TicketId == i.TicketId) : null;
 
             if (flight != null && seat != null)
             {
@@ -53,9 +54,18 @@
                     <div class="select-seat col">
                         @seat.SeatNumber
                     </div>
-                    <div class="purchase-fastpass col">
-                        <a class="purchase-fastpass-btn" asp-controller="Fastpasses" asp-action="Detail" asp-route-id="@ticket.TicketId">Purchase Fastpass</a>
-                    </div>
+                    @if (fastpass != null)
+                    {
+                        <div class="select-seat col">
+                            Fastpass purchased!
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="purchase-fastpass col">
+                            <a class="purchase-fastpass-btn" asp-controller="Fastpasses" asp-action="Detail" asp-route-id="@ticket.TicketId">Purchase Fastpass</a>
+                        </div>
+                    }                    
                 </div>
             }            
         }

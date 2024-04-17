@@ -21,8 +21,9 @@ namespace Southwest_Airlines.Controllers
             var tickets = _context.Tickets.Where(t => t.CustomerId == customer.CustomerId).ToList();
             var flights = _context.Flights.ToList();
             var seats = _context.Seats.ToList();
+            var fastpasses = _context.Fastpasses.ToList();
             
-            TicketListModel ticketListModel = new TicketListModel(tickets, flights, seats);
+            TicketListModel ticketListModel = new TicketListModel(tickets, flights, seats, fastpasses);
 
             return View("~/Views/Tickets/Index.cshtml", ticketListModel);
         }
