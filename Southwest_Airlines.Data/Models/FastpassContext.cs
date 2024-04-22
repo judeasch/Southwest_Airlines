@@ -141,6 +141,15 @@ public partial class FastpassContext : IdentityDbContext<ApplicationUser>
                 .OnDelete(DeleteBehavior.Cascade);
         });
 
+        modelBuilder.Entity<Employee>(entity =>
+        {
+            entity.ToTable("EMPLOYEE");
+
+            entity.HasMany(e => e.Flights)
+                .WithMany(e => e.Employees)
+                .UsingEntity<EmployeeFlight>();
+        });
+
         base.OnModelCreating(modelBuilder);
     }
 
