@@ -18,6 +18,10 @@ namespace Southwest_Airlines.Controllers
         {
             // get all necessary info to view a Ticket
             var customer = _context.Customers.Where(c => c.UserId == id).FirstOrDefault();
+            if (customer == null)
+            {
+                return View(); // add error view here
+            }
             var tickets = _context.Tickets.Where(t => t.CustomerId == customer.CustomerId).ToList();
             var flights = _context.Flights.ToList();
             var seats = _context.Seats.ToList();

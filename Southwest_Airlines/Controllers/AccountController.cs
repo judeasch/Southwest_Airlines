@@ -12,11 +12,13 @@ namespace Southwest_Airlines.Controllers
         // Identity framework built-in properties that allow for logging in and user creation
         private SignInManager<ApplicationUser> _signManager;
         private UserManager<ApplicationUser> _userManager;
+        private readonly FastpassContext _context; // dbcontext allows to perform crud operations on database
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signManager)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signManager, FastpassContext context)
         {
             _userManager = userManager;
             _signManager = signManager;
+            _context = context;
         }
 
         // returns the Register.cshtml view
@@ -45,6 +47,10 @@ namespace Southwest_Airlines.Controllers
 
                 if (result.Succeeded)
                 {
+                    Customer customer = new Customer(user.Id);
+                    _context.Add(customer);
+                    _context.SaveChanges();
+
                     await _signManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");
                 }

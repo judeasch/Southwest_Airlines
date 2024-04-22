@@ -30,6 +30,10 @@ public partial class Customer
     public int CustomerId { get; set; }
     public string? UserId { get; set; }
 
+    public Customer(string? userId)
+    {
+        UserId = userId;
+    }
 
     public virtual ApplicationUser User { get; set; }
     public virtual ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
