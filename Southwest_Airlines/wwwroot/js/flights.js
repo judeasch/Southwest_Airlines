@@ -26,7 +26,7 @@ $(function () {
                 data: obj,
                 success: function (result) {
 
-                    alert("success! (maybe)");
+                    alert("success!");
                 },
                 error: function (result) {
                     alert("failure");

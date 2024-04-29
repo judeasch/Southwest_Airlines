@@ -19,11 +19,9 @@ public partial class FastpassContext : IdentityDbContext<ApplicationUser>
     }
 
     public virtual DbSet<Customer> Customers { get; set; }
+    public virtual DbSet<Employee> Employees { get; set; }
 
     public virtual DbSet<Flight> Flights { get; set; }
-
-    // public virtual DbSet<Login> Logins { get; set; }
-
     public virtual DbSet<Seat> Seats { get; set; }
 
     public virtual DbSet<Ticket> Tickets { get; set; }
@@ -36,6 +34,7 @@ public partial class FastpassContext : IdentityDbContext<ApplicationUser>
         modelBuilder.Entity<ApplicationUser>(entity =>
         {
             entity.HasOne(d => d.Customer).WithOne(p => p.User).HasForeignKey<Customer>(d => d.UserId);
+            entity.HasOne(d => d.Employee).WithOne(p => p.User).HasForeignKey<Employee>(d => d.UserId);
         });
 
         modelBuilder.Entity<Customer>(entity =>

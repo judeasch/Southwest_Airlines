@@ -11,7 +11,10 @@ namespace Southwest_Airlines.Data.Models
         public int EmployeeId { get; set; }
         public string FirstName {  get; set; }
         public string LastName { get; set; }
-        public List<Flight> Flights { get; set; }
-        public List<EmployeeFlight> EmployeeFlights { get; set; }
+        public string? UserId { get; set; }
+
+        public virtual ApplicationUser User { get; set; }
+        public List<Flight> Flights { get; set; } = [];
+        public List<EmployeeFlight> EmployeeFlights { get; set; } = [];
     }
 }

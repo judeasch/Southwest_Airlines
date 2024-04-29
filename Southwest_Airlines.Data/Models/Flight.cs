@@ -24,6 +24,6 @@ public partial class Flight
     public virtual ICollection<Seat> Seats { get; set; } = new List<Seat>();
 
     public virtual ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
-    public List<Employee> Employees { get; set; }
-    public List<EmployeeFlight> EmployeeFlights { get; set; }
+    public List<Employee> Employees { get; set; } = [];
+    public List<EmployeeFlight> EmployeeFlights { get; set; } = [];
 }

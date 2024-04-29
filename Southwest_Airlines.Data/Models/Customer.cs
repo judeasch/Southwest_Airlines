@@ -35,6 +35,8 @@ public partial class Customer
         UserId = userId;
     }
 
+    public Customer () { }
+
     public virtual ApplicationUser User { get; set; }
     public virtual ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
     public virtual ICollection<PaymentInfo> PaymentInfo { get; set; } = new List<PaymentInfo>();

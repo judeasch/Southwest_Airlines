@@ -48,8 +48,13 @@ namespace Southwest_Airlines.Controllers
             var cardCheck = CreditCardCheck(model.CardNumber);
             if (!cardCheck)
             {
-                return RedirectToAction("Error");
+                ModelState.AddModelError("Error", "Invalid credit card number.");
+
+                PaymentInfo paymentInfo = new PaymentInfo(model.CustomerId, model.TicketId);
+                return View("~/Views/PaymentInfo/Detail.cshtml", paymentInfo);
             }
+
+            ModelState.ClearValidationState(nameof(model));
 
             // check if customer already has payment info on file
             var checkExists = _context.PaymentInfo
@@ -75,7 +80,10 @@ namespace Southwest_Airlines.Controllers
             _context.Fastpasses.Add(fastpass);
             _context.SaveChanges();
 
-            return View("~/Views/Home/Index.cshtml"); // redirect to Home page
+            _flight.NumberOfFastpasses = _flight.NumberOfFastpasses - 1; // update the selected flight's available Fastpasses
+            _context.SaveChanges();
+
+            return View("~/Views/Shared/_Success.cshtml"); // redirect to Success page
         }
 
         public static bool CreditCardCheck(string creditCardNumber)
@@ -86,18 +94,18 @@ namespace Southwest_Airlines.Controllers
                 return false;
             }
 
-            //// 1.	Starting with the check digit double the value of every other digit 
-            //// 2.	If doubling of a number results in a two digits number, add up
-            ///   the digits to get a single digit number. This will results in eight single digit numbers                    
-            //// 3. Get the sum of the digits
+            // use luhn algorithm to validate card
             int sumOfDigits = creditCardNumber.Where((e) => e >= '0' && e <= '9')
                             .Reverse()
                             .Select((e, i) => ((int)e - 48) * (i % 2 == 0 ? 1 : 2))
                             .Sum((e) => e / 10 + e % 10);
+            
+            if (sumOfDigits == 0) 
+            { 
+                return false;
+            }
 
-
-            //// If the final sum is divisible by 10, then the credit card number
-            //   is valid. If it is not divisible by 10, the number is invalid.            
+            // If the final sum is divisible by 10, then the credit card number is valid         
             return sumOfDigits % 10 == 0;
         }
     }

@@ -23,17 +23,27 @@ namespace Southwest_Airlines.Controllers
         }
 
         // Will list available flights
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Index(string? id)
         {
+            if (id != null) // check if an employee is accessing their assigned flights
+            {
+                var employee = _context.Employees.Where(e => e.UserId == id).Include(e => e.Flights).FirstOrDefault();
+
+                FlightListModel employeeFlightListModel = new FlightListModel(employee.Flights, true); // set IsEmployee to true
+
+                return View(employeeFlightListModel);
+            }
+
             var flights = _context.Flights.ToList();
-            FlightListModel flightListModel = new FlightListModel(flights);
+            FlightListModel flightListModel = new FlightListModel(flights, false); // set IsEmployee to false
 
             return View(flightListModel);
         }
 
         // Shows seat map for selected flight
         [HttpGet]
-        public IActionResult Detail(int id)
+        public IActionResult Seats(int id)
         {
             _flight = _context.Set<Flight>().Find(id);
             if (_flight != null)
@@ -42,9 +52,28 @@ namespace Southwest_Airlines.Controllers
 
                 FlightModel viewModel = new FlightModel(_flight, seats);
 
-                return View("Detail", viewModel);
+                return View("Seats", viewModel);
             }
             
+            return View("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Passengers(int id)
+        {
+            _flight = _context.Set<Flight>().Find(id);
+            if (_flight != null)
+            {
+                var tickets = _context.Tickets.Where(t => t.FlightId == _flight.FlightId).ToList();
+                var customers = _context.Customers.ToList();
+                var seats = _context.Seats.ToList();
+                
+                var fastpasses = _context.Fastpasses.ToList();
+
+                PassengerModel viewModel = new PassengerModel(_flight, customers, seats, tickets, fastpasses);
+                return View("Passengers", viewModel);
+            }
+
             return View("Index");
         }
 

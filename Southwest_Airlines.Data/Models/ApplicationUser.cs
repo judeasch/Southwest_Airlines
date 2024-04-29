@@ -11,5 +11,6 @@ namespace Southwest_Airlines.Data.Models
     public class ApplicationUser : IdentityUser
     {
         public virtual Customer? Customer { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

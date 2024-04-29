@@ -60,6 +60,12 @@
                             Fastpass purchased!
                         </div>
                     }
+                    else if (flight.NumberOfFastpasses <= 0)
+                    {
+                        <div class="select-seat col">
+                            No Fastpasses available
+                        </div>
+                    }
                     else
                     {
                         <div class="purchase-fastpass col">
