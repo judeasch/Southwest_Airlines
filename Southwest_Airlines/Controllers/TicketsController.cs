@@ -20,16 +20,25 @@ namespace Southwest_Airlines.Controllers
             var customer = _context.Customers.Where(c => c.UserId == id).FirstOrDefault();
             if (customer == null)
             {
-                return View(); // add error view here
+                ModelState.AddModelError("Error", "The customer was not found.");
+                return RedirectToAction("Index", "Home"); // add error view here
             }
-            var tickets = _context.Tickets.Where(t => t.CustomerId == customer.CustomerId).ToList();
-            var flights = _context.Flights.ToList();
-            var seats = _context.Seats.ToList();
-            var fastpasses = _context.Fastpasses.ToList();
-            
-            TicketListModel ticketListModel = new TicketListModel(tickets, flights, seats, fastpasses);
+            try
+            {
+                var tickets = _context.Tickets.Where(t => t.CustomerId == customer.CustomerId).ToList();
+                var flights = _context.Flights.ToList();
+                var seats = _context.Seats.ToList();
+                var fastpasses = _context.Fastpasses.ToList();
 
-            return View("~/Views/Tickets/Index.cshtml", ticketListModel);
+                TicketListModel ticketListModel = new TicketListModel(tickets, flights, seats, fastpasses);
+
+                return View("~/Views/Tickets/Index.cshtml", ticketListModel);
+            }
+            catch
+            {
+                ModelState.AddModelError("Error", "There was an error finding flight information.");
+                return RedirectToAction("Index", "Home"); // add error view here
+            }
         }
     }
 }

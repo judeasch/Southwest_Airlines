@@ -28,17 +28,32 @@ namespace Southwest_Airlines.Controllers
         {
             if (id != null) // check if an employee is accessing their assigned flights
             {
-                var employee = _context.Employees.Where(e => e.UserId == id).Include(e => e.Flights).FirstOrDefault();
+                try
+                {
+                    var employee = _context.Employees.Where(e => e.UserId == id).Include(e => e.Flights).FirstOrDefault();
 
-                FlightListModel employeeFlightListModel = new FlightListModel(employee.Flights, true); // set IsEmployee to true
+                    FlightListModel employeeFlightListModel = new FlightListModel(employee.Flights, true); // set IsEmployee to true
 
-                return View(employeeFlightListModel);
+                    return View(employeeFlightListModel);
+                }
+                catch
+                {
+                    ModelState.AddModelError("Error", "The employee was not found.");
+                    return RedirectToAction("Index", "Home");
+                }
             }
+            try
+            {
+                var flights = _context.Flights.ToList();
+                FlightListModel flightListModel = new FlightListModel(flights, false); // set IsEmployee to false
 
-            var flights = _context.Flights.ToList();
-            FlightListModel flightListModel = new FlightListModel(flights, false); // set IsEmployee to false
-
-            return View(flightListModel);
+                return View(flightListModel);
+            }
+            catch
+            {
+                ModelState.AddModelError("Error", "Could not find flights.");
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         // Shows seat map for selected flight
@@ -55,16 +70,18 @@ namespace Southwest_Airlines.Controllers
                 return View("Seats", viewModel);
             }
             
-            return View("Index");
+            ModelState.AddModelError("Error", "The flight was not found.");
+            return Redirect(Request.Headers.Referer.ToString());
         }
 
+        // get a list of passengers for a flight for employee view
         [HttpGet]
         public IActionResult Passengers(int id)
         {
             _flight = _context.Set<Flight>().Find(id);
             if (_flight != null)
             {
-                var tickets = _context.Tickets.Where(t => t.FlightId == _flight.FlightId).ToList();
+                var tickets = _context.Tickets.Where(t => t.FlightId == _flight.FlightId).ToList(); // get a list of tickets for particular flight
                 var customers = _context.Customers.ToList();
                 var seats = _context.Seats.ToList();
                 
@@ -74,54 +91,69 @@ namespace Southwest_Airlines.Controllers
                 return View("Passengers", viewModel);
             }
 
-            return View("Index");
+            ModelState.AddModelError("Error", "The flight was not found.");
+            return Redirect(Request.Headers.Referer.ToString());
         }
 
         [HttpPost]
         public async Task<IActionResult> UpdateSeat(string seatNum, int flightId)
         {
-            Dictionary<string, int> letterValues = new Dictionary<string, int>()
+            try
             {
-                { "A", 5 },
-                { "B", 4 },
-                { "C", 3 },
-                { "D", 2 },
-                { "E", 1 },
-                { "F", 0 }
-            };
-
-            _flight = _context.Set<Flight>().Find(flightId);
-
-            var offsetValue = letterValues[seatNum[seatNum.Length - 1].ToString()]; // get last char of seatNum, which is the letter
-            var row = Convert.ToInt32(seatNum.Substring(0, seatNum.Length - 1)); // get the row number, so all chars except the letter
-            var seatNumInt = (row * 6) - offsetValue; // get the seat number as an int
-
-            if (_flight != null && _flight.TotalNumberOfSeats > 0) // check if there are still seats available
-            {
-                Seat seat = new Seat(seatNumInt.ToString(), _flight.FlightId);
-                _context.Seats.Add(seat);
-                _context.SaveChanges(); // save Seat changes here so that we can create a new Ticket
-
-                var user = await _userManager.GetUserAsync(User);
-                var userId = user.Id;
-                var customer = _context.Customers
-                    .Where(u => u.UserId == userId)
-                    .FirstOrDefault();
-
-                if (customer != null)
+                Dictionary<string, int> letterValues = new Dictionary<string, int>()
                 {
-                    Ticket ticket = new Ticket(seat.SeatId, _flight.FlightId, customer.CustomerId);
-                    _context.Tickets.Add(ticket);
+                    { "A", 5 },
+                    { "B", 4 },
+                    { "C", 3 },
+                    { "D", 2 },
+                    { "E", 1 },
+                    { "F", 0 }
+                };
 
-                    var numOfSeats = _flight.TotalNumberOfSeats - 1; // update number of available seats on the flight
-                    _flight.TotalNumberOfSeats = numOfSeats;
-                    _context.SaveChanges();
+                _flight = _context.Set<Flight>().Find(flightId);
+
+                var offsetValue = letterValues[seatNum[seatNum.Length - 1].ToString()]; // get last char of seatNum, which is the letter
+                var row = Convert.ToInt32(seatNum.Substring(0, seatNum.Length - 1)); // get the row number, so all chars except the letter
+                var seatNumInt = (row * 6) - offsetValue; // get the seat number as an int
+
+                if (_flight != null && _flight.TotalNumberOfSeats > 0) // check if there are still seats available
+                {
+                    Seat seat = new Seat(seatNumInt.ToString(), _flight.FlightId);
+                    _context.Seats.Add(seat);
+                    _context.SaveChanges(); // save Seat changes here so that we can create a new Ticket
+
+                    var user = await _userManager.GetUserAsync(User);
+                    var userId = user.Id;
+                    var customer = _context.Customers
+                        .Where(u => u.UserId == userId)
+                        .FirstOrDefault();
+
+                    if (customer != null)
+                    {
+                        Ticket ticket = new Ticket(seat.SeatId, _flight.FlightId, customer.CustomerId);
+                        _context.Tickets.Add(ticket);
+
+                        var numOfSeats = _flight.TotalNumberOfSeats - 1; // update number of available seats on the flight
+                        _flight.TotalNumberOfSeats = numOfSeats;
+                        _context.SaveChanges();
+
+                        return RedirectToAction("Index", "Flights");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Error", "The customer was not found.");
+                        return RedirectToAction("Index", "Flights");
+                    }                   
                 }
-                
+
+                ModelState.AddModelError("Error", "The flight was not found or there are no seats available.");
                 return RedirectToAction("Index", "Flights");
             }
-
-            return RedirectToAction("Index", "Flights");
+            catch
+            {
+                ModelState.AddModelError("Error", "There was an error processing your selection. It's possible the seat you selected is invalid.");
+                return RedirectToAction("Index", "Flights");
+            }
         }
     }
 }

@@ -25,70 +25,91 @@ namespace Southwest_Airlines.Controllers
         [HttpGet]
         public IActionResult Detail(int id)
         {
-            _ticket = _context.Set<Ticket>().Find(id);
-            _customer = _context.Customers
-                .Where(u => u.CustomerId == _ticket.CustomerId)
-                .FirstOrDefault();
-            
-            if (_ticket != null)
+            try
             {
-                // create model w/ CustomerId and TicketId already set so they can be used in UpdateFastpass
-                PaymentInfo paymentInfo = new PaymentInfo(_customer.CustomerId, _ticket.TicketId);
+                _ticket = _context.Set<Ticket>().Find(id);
+                _customer = _context.Customers
+                    .Where(u => u.CustomerId == _ticket.CustomerId)
+                    .FirstOrDefault();
 
-                return View("~/Views/PaymentInfo/Detail.cshtml", paymentInfo);
+                if (_ticket != null)
+                {
+                    // create model w/ CustomerId and TicketId already set so they can be used in UpdateFastpass
+                    PaymentInfo paymentInfo = new PaymentInfo(_customer.CustomerId, _ticket.TicketId);
+
+                    return View("~/Views/PaymentInfo/Detail.cshtml", paymentInfo);
+                }
+                
+                ModelState.AddModelError("Error", "There was an error processing your ticket information.");
+                return Redirect(Request.Headers.Referer.ToString());
             }
-            // todo: redirect to an error page
-            return View("~/Views/PaymentInfo/Detail.cshtml");
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("Error", "There was an error processing your ticket information.");
+                return Redirect(Request.Headers.Referer.ToString());
+            }
+            
         }
 
         [HttpPost]
         public async Task<IActionResult> UpdateFastpass(PaymentInfo model)
         {
-            // check to make sure card number is valid
-            var cardCheck = CreditCardCheck(model.CardNumber);
-            if (!cardCheck)
+            try
             {
-                ModelState.AddModelError("Error", "Invalid credit card number.");
+                // check to make sure card number is valid
+                var cardCheck = CreditCardCheck(model.CardNumber);
+                if (!cardCheck)
+                {
+                    ModelState.AddModelError("Error", "Invalid credit card number.");
+
+                    PaymentInfo paymentInfo = new PaymentInfo(model.CustomerId, model.TicketId);
+                    return View("~/Views/PaymentInfo/Detail.cshtml", paymentInfo); // give the user the page again w/ error
+                }
+
+                // clear errors if any
+                ModelState.ClearValidationState(nameof(model));
+
+                // check if customer already has payment info on file
+                var checkExists = _context.PaymentInfo
+                    .Where(p => p.CustomerId == model.CustomerId).FirstOrDefault();
+                if (checkExists == null)
+                {
+                    // create new PaymentInfo for that Customer
+                    PaymentInfo paymentInfo = new PaymentInfo(model.CustomerId, model.PaymentMethod, model.CardholderName, model.CardNumber, model.ExpiryDate);
+                    _context.PaymentInfo.Add(paymentInfo);
+                    _context.SaveChanges();
+                }
+
+                // todo: 'send off' credit card data here?
+                _ticket = _context.Set<Ticket>().Find(model.TicketId);
+                _flight = _context.Flights
+                    .Where(u => u.FlightId == _ticket.FlightId)
+                    .FirstOrDefault();
+
+                var validFrom = _flight.DepartureTime;
+                var validUntil = _flight.ArrivalTime;
+
+                Fastpass fastpass = new Fastpass(_ticket.TicketId, validFrom, validUntil);
+                _context.Fastpasses.Add(fastpass); // add fastpass to database
+                _context.SaveChanges();
+
+                _flight.NumberOfFastpasses = _flight.NumberOfFastpasses - 1; // update the selected flight's available Fastpasses
+                _context.SaveChanges();
+
+                return View("~/Views/Shared/_Success.cshtml"); // redirect to Success page
+            }
+            catch
+            {
+                ModelState.AddModelError("Error", "There was an error processing your payment information.");
 
                 PaymentInfo paymentInfo = new PaymentInfo(model.CustomerId, model.TicketId);
-                return View("~/Views/PaymentInfo/Detail.cshtml", paymentInfo);
+                return View("~/Views/PaymentInfo/Detail.cshtml", paymentInfo); // give the user the page again w/ error
             }
-
-            ModelState.ClearValidationState(nameof(model));
-
-            // check if customer already has payment info on file
-            var checkExists = _context.PaymentInfo
-                .Where(p => p.CustomerId == model.CustomerId).FirstOrDefault();
-            if (checkExists == null)
-            {
-                // create new PaymentInfo for that Customer
-                PaymentInfo paymentInfo = new PaymentInfo(model.CustomerId, model.PaymentMethod, model.CardholderName, model.CardNumber, model.ExpiryDate);
-                _context.PaymentInfo.Add(paymentInfo);
-                _context.SaveChanges();
-            }
-
-            // todo: 'send off' credit card data here?
-            _ticket = _context.Set<Ticket>().Find(model.TicketId);
-            _flight = _context.Flights
-                .Where(u => u.FlightId == _ticket.FlightId)
-                .FirstOrDefault();
-
-            var validFrom = _flight.DepartureTime;
-            var validUntil = _flight.ArrivalTime;
-
-            Fastpass fastpass = new Fastpass(_ticket.TicketId, validFrom, validUntil);
-            _context.Fastpasses.Add(fastpass);
-            _context.SaveChanges();
-
-            _flight.NumberOfFastpasses = _flight.NumberOfFastpasses - 1; // update the selected flight's available Fastpasses
-            _context.SaveChanges();
-
-            return View("~/Views/Shared/_Success.cshtml"); // redirect to Success page
         }
 
         public static bool CreditCardCheck(string creditCardNumber)
         {
-            //// check whether input string is null or empty
+            // check whether input string is null or empty
             if (string.IsNullOrEmpty(creditCardNumber))
             {
                 return false;
@@ -100,6 +121,7 @@ namespace Southwest_Airlines.Controllers
                             .Select((e, i) => ((int)e - 48) * (i % 2 == 0 ? 1 : 2))
                             .Sum((e) => e / 10 + e % 10);
             
+            // if input wasn't valid then return false
             if (sumOfDigits == 0) 
             { 
                 return false;

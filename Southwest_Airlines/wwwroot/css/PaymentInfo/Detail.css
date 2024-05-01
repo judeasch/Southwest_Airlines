@@ -1,5 +1,5 @@
 ﻿
-div.payment {
+form.payment {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,7 +13,7 @@ div.payment {
 }
 
 
-div.payment-row {
+div.row {
     margin-bottom: 15px;
     width: 100%; /* Full width for form elements */
 }
@@ -30,7 +30,7 @@ input.payment-input {
 }
 
 /* Style for the payment button */
-button.payment-button {
+button.submit-button {
     background-color: #ffbf27; /* yellow button */
     color: #111b40; /* Dark blue text color for contrast */
     border: none; /* No border for a flat design */
@@ -43,12 +43,12 @@ button.payment-button {
 }
 
     
-    button.payment-button:hover {
+    button.submit-button:hover {
         background-color: #e0a800; /* Slightly darker yellow on hover */
     }
 
     /* Focus effect for the payment button */
-    button.payment-button:focus {
+    button.submit-button:focus {
         outline: 2px solid #ffbf27; /* Yellow outline to indicate focus */
         outline-offset: 2px;
     }
