@@ -31,15 +31,17 @@
                         </li>
                         
                             @if (User.Identity.IsAuthenticated)
-                            { 
+                            {
+                                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-controller="Tickets" asp-action="Index" asp-route-id="@User.FindFirstValue(ClaimTypes.NameIdentifier)">My Tickets</a>
+                                    <a class="nav-link text-dark" asp-controller="Tickets" asp-action="Index" asp-route-id="@userId">My Tickets</a>
                                 </li>
 
-                                if (User.IsInRole("Admin"))
+                                if (User.IsInRole("Employee"))
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-controller="Home" asp-action="Admin">Admin</a>
+                                        <a class="nav-link text-dark" asp-controller="Flights" asp-action="Index" asp-route-id="@userId">Assigned Flights</a>
                                     </li>
                                 }
                                 <li class="nav-item">

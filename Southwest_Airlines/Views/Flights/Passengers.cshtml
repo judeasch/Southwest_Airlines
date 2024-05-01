@@ -1,0 +1,66 @@
+﻿@model PassengerModel
+@{
+    ViewData["Title"] = "Passengers";
+}
+<head>
+    <link rel="stylesheet" href="~/css/Flights/passengers.css" asp-append-version="true" />
+</head>
+
+<section class="passengers">
+    <h1>Passengers</h1>
+    <div class="passenger-grid">
+        <header>
+            <div class="first-name col">
+                First Name
+            </div>
+            <div class="last-name col">
+                Last Name
+            </div>
+            <div class="seat col">
+                Seat Number
+            </div>
+            <div class="fastpass col">
+                Ticket Status
+            </div>
+        </header>
+        @foreach (var passenger in Model.Customers)
+        {
+            var ticket = Model.Tickets.FirstOrDefault(i => i.CustomerId == passenger.CustomerId) != null ? Model.Tickets.FirstOrDefault(i => i.CustomerId == passenger.CustomerId) : null;
+            if (ticket != null)
+            {
+                var seat = Model.Seats.FirstOrDefault(i => ticket.SeatId == i.SeatId);
+                var fastpass = Model.Fastpasses.FirstOrDefault(i => ticket.TicketId == i.TicketId) != null ? Model.Fastpasses.FirstOrDefault(i => ticket.TicketId == i.TicketId) : null;
+
+                <div class="row">
+                    <div class="origin col">
+                        @passenger.FirstName
+                    </div>
+                    <div class="destination col">
+                        @passenger.LastName
+                    </div>
+                    <div class="seat col">
+                        @seat.SeatNumber
+                    </div>
+                    @if (fastpass != null)
+                    {
+                        <div class="fastpass col">
+                            Fastpass purchased
+                        </div>
+                    }
+                    else if (Model.Flight.NumberOfFastpasses > 0)
+                    {
+                        <div class="fastpass col">
+                            <a class="select-seat-btn" asp-controller="Fastpasses" asp-action="Detail" asp-route-id="@ticket.TicketId">Upgrade Ticket</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="fastpass col">
+                            No Fastpasses available
+                        </div>
+                    }
+                </div>
+            }           
+        }
+    </div>
+</section>

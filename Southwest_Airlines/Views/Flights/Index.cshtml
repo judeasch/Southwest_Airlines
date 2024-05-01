@@ -25,6 +25,12 @@
             <div class="select-seat col">
                 Seats
             </div>
+            @if (Model.IsEmployee)
+            {
+                <div class="select-seat col">
+                    Passengers
+                </div>
+            }
         </header>
         @foreach (var flight in Model.Flights)
         {
@@ -42,11 +48,14 @@
                     @flight.ArrivalTime
                 </div>
                 <div class="select-seat col">
-                    <a class="select-seat-btn" asp-controller="Flights" asp-action="Detail" asp-route-id="@flight.FlightId">Seats</a>
+                    <a class="select-seat-btn" asp-controller="Flights" asp-action="Seats" asp-route-id="@flight.FlightId">View Seats</a>
                 </div>
-                @* <div class="fastpass col">
-                    <a class="fastpass-btn" asp-controller="Fastpasses" asp-action="Detail" asp-route-id="@flight.FlightId">Seats</a>
-                </div> *@
+                @if (Model.IsEmployee)
+                {
+                    <div class="select-seat col">
+                        <a class="passengers-btn" asp-controller="Flights" asp-action="Passengers" asp-route-id="@flight.FlightId">View Passengers</a>
+                    </div>
+                }
             </div>
         }
     </div>

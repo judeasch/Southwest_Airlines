@@ -9,28 +9,36 @@
 
 <h1>Payment Information</h1>
 
-<form method="post" asp-controller="Fastpasses" asp-action="UpdateFastpass">
+@if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"].Errors.Count > 0)
+{
+    <div class="error">
+       @ViewData.ModelState["Error"].Errors.First().ErrorMessage
+    </div>
+}
+
+<form class="payment" method="post" asp-controller="Fastpasses" asp-action="UpdateFastpass">
     <div asp-validation-summary="ModelOnly"></div>
     <input type="hidden" asp-for="CustomerId" value="@Model.CustomerId" />
+    <input type="hidden" asp-for="TicketId" value="@Model.TicketId" />
     <div class="payment-info">
         <div class="row">
             <label asp-for="CardholderName">Full Name on Card</label>
-            <input asp-for="CardholderName" />
+            <input class="payment-input" asp-for="CardholderName" />
             <span asp-validation-for="CardholderName"></span>
         </div>
         <div class="row">
             <label asp-for="PaymentMethod">Payment Method</label>
-            <input asp-for="PaymentMethod" />
+            <input class="payment-input" asp-for="PaymentMethod" />
             <span asp-validation-for="PaymentMethod"></span>
         </div>
         <div>
             <label asp-for="CardNumber">Card Number</label>
-            <input asp-for="CardNumber" />
+            <input class="payment-input" asp-for="CardNumber" />
             <span asp-validation-for="CardNumber"></span>
         </div>
         <div>
             <label asp-for="ExpiryDate">Expiration Date</label>
-            <input asp-for="ExpiryDate" />
+            <input class="payment-input" asp-for="ExpiryDate" />
             <span asp-validation-for="ExpiryDate"></span>
         </div>
         <button class="submit-button" type="submit" value="Fastpass">Submit</button>

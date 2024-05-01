@@ -6,9 +6,30 @@ namespace Southwest_Airlines.Models
     public class FlightListModel
     {
         public List<Flight> Flights { get; set; }
-        public FlightListModel(List<Flight> flights) 
+        public bool IsEmployee { get; set; }
+        public FlightListModel(List<Flight> flights, bool isEmployee) 
         {
             Flights = flights;
+            IsEmployee = isEmployee;
+        }
+    }
+
+    // to view an Employee's assigned Flight's passengers
+    public class PassengerModel
+    {
+        public Flight Flight { get; set; }
+        public List<Customer> Customers { get; set; }
+        public List<Seat> Seats { get; set; }
+        public List<Ticket> Tickets { get; set; }
+        public List<Fastpass> Fastpasses { get; set; }
+        
+        public PassengerModel(Flight flight, List<Customer> customers, List<Seat> seats, List<Ticket> tickets, List<Fastpass> fastpasses)
+        {
+            Flight = flight;
+            Customers = customers;
+            Seats = seats;
+            Tickets = tickets;
+            Fastpasses = fastpasses;           
         }
     }
 

@@ -1,0 +1,15 @@
+﻿header, .row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+    header > div {
+        font-weight: bold;
+    }
+
+.col {
+    flex: 1;
+}
