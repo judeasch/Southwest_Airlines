@@ -12,5 +12,16 @@ header > div {
 
 .col {
     flex: 1;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin: 10px; /* Margin */
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow */
 }
 
+
+    .col:hover {
+        transform: translateY(-5px); /* Move up on hover */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }

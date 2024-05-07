@@ -1,15 +1,35 @@
-﻿header, .row {
+﻿/*need to updata fligh and ticket css*/
+
+
+
+header, .row {
     display: flex;
     flex-direction: row;
     align-items: center;
-    align-content: center;
-    justify-content: center;
+    justify-content: space-between; 
+    background-color: #f0f0f0; 
+    padding: 10px 20px; 
+    border-bottom: 2px solid #ccc; /* Border */
 }
 
     header > div {
         font-weight: bold;
-    }
+        color: #333; 
+
 
 .col {
     flex: 1;
+    padding: 20px; 
+    border: 1px solid #ccc; 
+    margin: 10px; /* Margin */
+    border-radius: 5px;
+    background-color: #fff; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow */
 }
+
+    
+    .col:hover {
+        transform: translateY(-5px); /* Move up on hover */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    }
+
