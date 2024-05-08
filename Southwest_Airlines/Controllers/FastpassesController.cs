@@ -96,7 +96,7 @@ namespace Southwest_Airlines.Controllers
                 _flight.NumberOfFastpasses = _flight.NumberOfFastpasses - 1; // update the selected flight's available Fastpasses
                 _context.SaveChanges();
 
-                return View("~/Views/Shared/_Success.cshtml"); // redirect to Success page
+                return RedirectToAction("Success", "Home"); // redirect to Success page
             }
             catch
             {

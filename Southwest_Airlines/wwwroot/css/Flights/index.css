@@ -4,11 +4,13 @@
     align-items: center;
     align-content: center;
     justify-content: center;
+    border-bottom: 2px solid #ccc; /* Border */
 }
 
-header > div {
-    font-weight: bold;
-}
+    header > div {
+        font-weight: bold;
+        color: #333;
+    }
 
 .col {
     flex: 1;

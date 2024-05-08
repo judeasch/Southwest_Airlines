@@ -21,15 +21,14 @@ $(function () {
             // use ajax to post the seat number to the UpdateSeat method of FlightsController
             $.ajax({
                 url: '/Flights/UpdateSeat',
-                type: "POST",  
+                type: "POST",
                 contentType: 'application/x-www-form-urlencoded',
                 data: obj,
                 success: function (result) {
-
-                    alert("success!");
+                    window.location.href = '/Home/Success';
                 },
                 error: function (result) {
-                    alert("failure");
+                    alert("There was an error trying to save your selection. Are you sure you clicked a valid seat?");
                 }
             });
         }

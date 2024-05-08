@@ -137,7 +137,7 @@ namespace Southwest_Airlines.Controllers
                         _flight.TotalNumberOfSeats = numOfSeats;
                         _context.SaveChanges();
 
-                        return RedirectToAction("Index", "Flights");
+                        return Ok(); // ajax will redirect
                     }
                     else
                     {

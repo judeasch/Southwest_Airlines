@@ -32,9 +32,9 @@ namespace Southwest_Airlines.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public ViewResult Success()
         {
-            return View();
+            return View("~/Views/Shared/_Success.cshtml"); // redirect to Success page
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
